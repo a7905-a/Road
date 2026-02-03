@@ -3,10 +3,10 @@ using UnityEngine.AI;
 
 public class Move : MonoBehaviour
 {
+    [SerializeField] LayerMask groud;
     Camera cam;
     NavMeshAgent agent;
     public bool isCommandedMove;
-    [SerializeField] LayerMask groud;
 
     Animator animator;
 
