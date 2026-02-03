@@ -1,49 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
+
 public class UnitSelectionBox : MonoBehaviour
 {
-    Camera myCam;
- 
-    [SerializeField]
-    RectTransform boxVisual;
- 
+    [SerializeField] RectTransform boxVisual;
+    Camera myCamera;
+
     Rect selectionBox;
- 
     Vector2 startPosition;
     Vector2 endPosition;
- 
-    private void Start()
+
+    void Start()
     {
-        myCam = Camera.main;
+        myCamera = Camera.main;
         startPosition = Vector2.zero;
         endPosition = Vector2.zero;
         DrawVisual();
     }
- 
-    private void Update()
+
+    void Update()
     {
-        // When Clicked
+        // 0은 마우스 왼쪽
         if (Input.GetMouseButtonDown(0))
         {
             startPosition = Input.mousePosition;
- 
-            // For selection the Units
+
+            // 박스 모양 초기화
             selectionBox = new Rect();
         }
- 
-        // When Dragging
+
+        
         if (Input.GetMouseButton(0))
         {
             if (boxVisual.rect.width > 0 || boxVisual.rect.height > 0)
             {
                 UnitSelectionManager.Instance.DeselectAll();
+                
                 SelectUnits();
             }
-            // 아래 두줄의 코드는 호불호의 영역인듯
-            // 없어도 되긴 하는데, 있으면 드래그 시작할때 영역에 닿으면 자동으로 선택됨
-            
 
             endPosition = Input.mousePosition;
             DrawVisual();
@@ -110,7 +105,9 @@ public class UnitSelectionBox : MonoBehaviour
     {
         foreach (var unit in UnitSelectionManager.Instance.allUnitsList)
         {
-            if (selectionBox.Contains(myCam.WorldToScreenPoint(unit.transform.position)))
+            if (unit.CompareTag("Enemy")) continue;
+            
+            if (selectionBox.Contains(myCamera.WorldToScreenPoint(unit.transform.position)))
             {
                 UnitSelectionManager.Instance.DragSelect(unit);
             }
