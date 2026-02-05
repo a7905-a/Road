@@ -28,14 +28,18 @@ public class UnitFollowState : StateMachineBehaviour
         {
             if (animator.transform.GetComponent<Move>().isCommandedMove == false)
             {
-                agent.SetDestination(attackController.targetToAttack.position);
-                animator.transform.LookAt(attackController.targetToAttack); // 휙 돌아버리까 Slerp로 보안
-
                 float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
-                if (distanceFromTarget < attackDistance)
+                if (distanceFromTarget <= attackDistance)
                 {
-                    agent.SetDestination(animator.transform.position);
+                    
+                    animator.transform.LookAt(attackController.targetToAttack); // 휙 돌아버리까 Slerp로 보안
                     animator.SetBool("Attack", true);
+                    
+                }
+                else
+                {
+                    agent.SetDestination(attackController.targetToAttack.position);
+                    
                 }
             }
         }

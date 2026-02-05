@@ -38,10 +38,11 @@ public class UnitAttackState : StateMachineBehaviour
             }
             
             float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
-                if (distanceFromTarget > stopAttackDistance || attackController.targetToAttack == null)
-                {
-                    animator.SetBool("Attack", false);
-                }
+
+            if (distanceFromTarget > stopAttackDistance || attackController.targetToAttack == null)
+            {
+                animator.SetBool("Attack", false);
+            }
 
         }
         else
