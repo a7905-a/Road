@@ -4,9 +4,13 @@ public class AttackController : MonoBehaviour
 {
     public Transform targetToAttack;
 
-    public Material idleStateMaterial;
-    public Material followStateMaterial;
-    public Material attackStateMaterial;
+    UnitFollowState followState;
+    UnitAttackState attackState;
+
+    
+    // public Material idleStateMaterial;
+    // public Material followStateMaterial;
+    // public Material attackStateMaterial;
 
     public int  unitDamage;
     public bool isPlayer;
@@ -55,6 +59,7 @@ public class AttackController : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, 10f*0.2f);
+        
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 1f);

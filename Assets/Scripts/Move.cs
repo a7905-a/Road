@@ -8,12 +8,11 @@ public class Move : MonoBehaviour
     NavMeshAgent agent;
     public bool isCommandedMove;
 
-    Animator animator;
+
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -32,18 +31,14 @@ public class Move : MonoBehaviour
             {
                 isCommandedMove = true;
                 agent.SetDestination(hit.point);
-                animator.SetBool("Moving", true); 
             }
         }
 
         if (agent.hasPath == false || agent.remainingDistance <= agent.stoppingDistance)
         {
             isCommandedMove = false;
-            animator.SetBool("Moving", false);
+
         }
-        else
-        {
-            animator.SetBool("Moving", true);
-        }
+
     }
 }

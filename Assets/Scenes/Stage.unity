@@ -5098,9 +5098,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackController
   targetToAttack: {fileID: 0}
-  idleStateMaterial: {fileID: 2100000, guid: 5c1b4e76615ca40478090a215dff446a, type: 2}
-  followStateMaterial: {fileID: 2100000, guid: b68c017e3bd5525489fb655d50ffc730, type: 2}
-  attackStateMaterial: {fileID: 2100000, guid: 44fd5896c56599c408d9ae07665ebd02, type: 2}
   unitDamage: 10
   isPlayer: 1
 --- !u!1 &6660854920939451296
