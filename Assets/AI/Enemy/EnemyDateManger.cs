@@ -12,9 +12,9 @@ public class EnemyDateManger : MonoBehaviour
     void GetEnemyDate()
     {
         print($"Name : {_enemyDate.EnemyName}\n" +
-              $"Description : {_enemyDate.EnemyDescription}\n" +
-              $"MaxHP : {_enemyDate.MaxHP}\n" +
-              $"Damage : {_enemyDate.Damage}\n" +
-              $"MoveSpeed : {_enemyDate.MoveSpeed}");
+            $"Description : {_enemyDate.EnemyDescription}\n" +
+            $"MaxHP : {_enemyDate.MaxHP}\n" +
+            $"Damage : {_enemyDate.Damage}\n" +
+            $"MoveSpeed : {_enemyDate.MoveSpeed}");
     }
 }

@@ -5,7 +5,8 @@ public class RTSCameraController : MonoBehaviour
 {
     // 싱글톤 패턴 -> 다른 스크립트에서 쉽게 접근 가능하지만 강한 결합이 됨
     public static RTSCameraController instance;
-
+    public BoxCollider cameraConfiner;
+    [SerializeField] Transform startCameraTransform;
     
     [SerializeField] Transform cameraTransform;
     public Transform followTransform; //프로퍼티로 변경 가능
@@ -50,10 +51,13 @@ public class RTSCameraController : MonoBehaviour
         newPosition = transform.position;
 
         movementSpeed = normalSpeed;
+        //transform.position = startCameraTransform.position;
     }
 
     void Update()
     {
+        
+
         // Allow Camera to follow Target
         if (followTransform != null)
         {
@@ -69,6 +73,17 @@ public class RTSCameraController : MonoBehaviour
         {
             followTransform = null;
         }
+
+        if (cameraConfiner != null)
+        {
+            Bounds bounds = cameraConfiner.bounds;
+            newPosition.x = Mathf.Clamp(newPosition.x, bounds.min.x, bounds.max.x);
+            newPosition.z = Mathf.Clamp(newPosition.z, bounds.min.z, bounds.max.z);
+        }
+
+        // 3. 최종 위치 적용
+        //transform.position = newPosition;
+        
     }
 
     void HandleCameraMovement()
