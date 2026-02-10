@@ -3,13 +3,13 @@ using UnityEngine;
 public class EnemyStateManager : MonoBehaviour
 {
     public IEnemyState CurrentState;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         TransitionToState(new IdleState());
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         CurrentState?.UpdateState(this);
@@ -17,9 +17,10 @@ public class EnemyStateManager : MonoBehaviour
 
     public void TransitionToState(IEnemyState newState)
     {
+        // CurrentState?는 CurrentState가 null이 아닐 때만 실행되도록 하는 null 조건부 연산자
         CurrentState?.ExitState(this);
         CurrentState = newState;
         CurrentState.EnterState(this);
-        print($"[TransitionToState] State transitioned to {newState}");
+        
     }
 }

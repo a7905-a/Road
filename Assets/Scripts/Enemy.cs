@@ -3,9 +3,24 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // public int health;
-    // internal void TakeDamage(int damageIoInflict)
+    [SerializeField] float chaseDistance = 5f; 
+    
+
+
+    void Update()
+    {
+        //if (player == null) return;
+
+        // if ( DistanceToPlayer() <= chaseDistance)
+        // {
+        //     Debug.Log("추적 시작!");
+        // }
+    }
+
+    // float DistanceToPlayer()
     // {
-    //     health -= damageIoInflict;
+    //     GameObject player = GameObject.FindWithTag("Player");
+    //     return Vector3.Distance(transform.position, player.transform.position);
+    // }
 }
 
