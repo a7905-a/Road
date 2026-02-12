@@ -18,6 +18,9 @@ public class UnitAttackState : StateMachineBehaviour
         attackController = animator.GetComponent<AttackController>();
         unit = animator.GetComponent<Unit>();
         attackController.SetAttackMaterial();
+
+        agent.ResetPath();
+        agent.velocity = Vector3.zero;
     }
 
 
@@ -29,7 +32,7 @@ public class UnitAttackState : StateMachineBehaviour
         animator.SetBool("Attack", false);
         
         //이동 상태 켜주기
-         animator.SetBool("Moving", true); 
+        animator.SetBool("Moving", true); 
         
         return; // 아래 공격 로직 실행하지 말고 바로 리턴
         }
@@ -37,8 +40,6 @@ public class UnitAttackState : StateMachineBehaviour
         if (attackController.targetToAttack != null && animator.transform.GetComponent<Move>().isCommandedMove == false)
         {
             LookAtTarget();
-
-            //agent.SetDestination(attackController.targetToAttack.position);
 
             if (attackTimer <= 0)
             {
@@ -68,7 +69,7 @@ public class UnitAttackState : StateMachineBehaviour
 {
     // 1. 방어 코드: 타겟이 사라졌는지 먼저 확인
     if (attackController.targetToAttack == null) return;
-
+    
     float damageToInflict = unit.unitData.Damage; // 오타 수정 (Io -> To)
 
     // 2. 핵심 수정: <Unit> 대신 부모 클래스인 <BaseUnit> (또는 LivingEntity) 사용

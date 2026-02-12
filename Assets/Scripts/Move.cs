@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class Move : MonoBehaviour
 {
-    [SerializeField] LayerMask groud;
+    [SerializeField] LayerMask ground;
     Camera cam;
     NavMeshAgent agent;
     public bool isCommandedMove;
@@ -24,27 +24,45 @@ public class Move : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            MoveToCursor();
+            if (MoveToCursor())
+            {
+                return;
+            }
+            
         }
 
-        //길이 없거나 혹은 도착했을 때 이동 명령을 끝내기 위한 조건문
-        if (agent.hasPath == false || agent.remainingDistance <= agent.stoppingDistance)
+        if (isCommandedMove)
         {
-            isCommandedMove = false;
-
+            CheckArrived();
         }
 
     }
 
-    void MoveToCursor()
+    bool MoveToCursor()
     {
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groud))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
         {
             isCommandedMove = true;
             agent.SetDestination(hit.point);
+            return true;
+        }
+        return false;
+    }
+
+    void CheckArrived()
+    {
+        if (agent.pathPending) return;
+
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            if (!agent.hasPath || agent.velocity.sqrMagnitude == 0)
+            {
+                isCommandedMove = false;
+            }
         }
     }
 }
+
