@@ -54,10 +54,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e00fed64b53a634a838e4ccc8ad644b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Move
-  isCommandedMove: 0
   groud:
     serializedVersion: 2
     m_Bits: 8
+  isCommandedMove: 0
 --- !u!114 &4265466868628622118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e83c8c160d21e04e8721079bf1bdd9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
-  unitMaxHealth: 100
+  unitData: {fileID: 0}
   healthTracker: {fileID: 270781181776680100}
 --- !u!114 &5040261392302643483
 MonoBehaviour:
@@ -84,12 +84,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a9b7cb0a8098647abae1728afcf2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackController
+  targetType: 0
   targetToAttack: {fileID: 0}
-  idleStateMaterial: {fileID: 2100000, guid: 5c1b4e76615ca40478090a215dff446a, type: 2}
-  followStateMaterial: {fileID: 2100000, guid: b68c017e3bd5525489fb655d50ffc730, type: 2}
-  attackStateMaterial: {fileID: 2100000, guid: 44fd5896c56599c408d9ae07665ebd02, type: 2}
   unitDamage: 10
-  isPlayer: 1
 --- !u!33 &5871646621514001640
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -416,6 +413,10 @@ PrefabInstance:
     - target: {fileID: 2268154870278373888, guid: c0fb8fcb57b244e4eb6dbc7b287d77cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495731769587798615, guid: c0fb8fcb57b244e4eb6dbc7b287d77cf, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6171146850500040549, guid: c0fb8fcb57b244e4eb6dbc7b287d77cf, type: 3}
       propertyPath: m_Name
