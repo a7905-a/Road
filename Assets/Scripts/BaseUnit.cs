@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class BaseUnit : MonoBehaviour
 {
     [Header("같이 받는 데이터")]
-    [SerializeField] protected UnitData unitData;
+    public UnitData unitData;
     [SerializeField] protected HealthTracker healthTracker;
 
     protected float currentHealth;
@@ -29,9 +29,10 @@ public class BaseUnit : MonoBehaviour
         }
     }
     // 데미지 공통 메서드
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+
         if (healthTracker != null && unitData != null)
             healthTracker.UpdateSliderValue(currentHealth, unitData.MaxHealth);
 

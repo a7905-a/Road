@@ -16,4 +16,4 @@ MonoBehaviour:
   EnemyDescription: 
   MaxHP: 1
   Damage: 10
-  AttackRange: 0
+  AttackRange: 5
