@@ -1,23 +1,26 @@
 using UnityEngine;
 
+public enum AttackTargetType
+{
+    Player,
+    Enemy
+}
+
 public class AttackController : MonoBehaviour
 {
+    [SerializeField] AttackTargetType targetType;
     public Transform targetToAttack;
 
-    UnitFollowState followState;
-    UnitAttackState attackState;
-
-    
-    // public Material idleStateMaterial;
-    // public Material followStateMaterial;
-    // public Material attackStateMaterial;
-
-    public int  unitDamage;
-    public bool isPlayer;
+    public int  unitDamage; //so로 변경 예정
+    string cachedTargetTag;
+    void Awake()
+    {
+        cachedTargetTag = targetType.ToString();
+    }
 
     void OnTriggerEnter(Collider other)
     {
-        if (isPlayer && other.CompareTag("Enemy") && targetToAttack == null)
+        if (other.CompareTag(cachedTargetTag) && targetToAttack == null)
         {
             targetToAttack = other.transform;
         }
@@ -25,7 +28,7 @@ public class AttackController : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (isPlayer && other.CompareTag("Enemy") && targetToAttack == null)
+        if (other.CompareTag(cachedTargetTag) && targetToAttack == null)
         {
             targetToAttack = other.transform;
         }
@@ -33,7 +36,7 @@ public class AttackController : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (isPlayer && other.CompareTag("Enemy") && targetToAttack != null)
+        if (other.CompareTag(cachedTargetTag) && targetToAttack != null)
         {
             targetToAttack = null;
         }
@@ -55,16 +58,6 @@ public class AttackController : MonoBehaviour
        //GetComponent<Renderer>().material = attackStateMaterial;
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, 10f*0.2f);
-        
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1f);
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, 1.2f);
-    }
+    
 }

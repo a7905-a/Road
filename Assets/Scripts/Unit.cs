@@ -2,29 +2,18 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Unit : MonoBehaviour
+public class Unit : BaseUnit
 {
-    float unitHealth;
-    public float unitMaxHealth;
 
-    public HealthTracker healthTracker;
-
-    Animator animator;
-    NavMeshAgent navMeshAgent;
-
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         UnitSelectionManager.Instance.allUnitsList.Add(gameObject);
-
-        unitHealth = unitMaxHealth;
-        UpdateHealthUI();
-        animator = GetComponent<Animator>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
+        if (agent.remainingDistance > agent.stoppingDistance)
         {
             animator.SetBool("Moving", true);
         }
@@ -33,28 +22,11 @@ public class Unit : MonoBehaviour
             animator.SetBool("Moving", false);
         }
     }
-    
 
-    void OnDestroy()
+    protected override void Retire()
     {
         UnitSelectionManager.Instance.allUnitsList.Remove(gameObject);
-    }
-
-    void UpdateHealthUI()
-    {
-        healthTracker.UpdateSliderValue(unitHealth, unitMaxHealth);
-
-        if (unitHealth <= 0)
-        {
-            // 유닛 기절 처리
-            Destroy(gameObject);
-        }   
-    }
-
-    internal void TakeDamage(int damageIoInflict)
-    {
-        unitHealth -= damageIoInflict;
-        UpdateHealthUI();
+        base.Retire();
     }
 
 }

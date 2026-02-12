@@ -3,24 +3,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] float chaseDistance = 5f; 
-    
-
-
-    void Update()
+    [SerializeField] EnemyStateManager enemyStateManager; 
+    void OnTriggerEnter(Collider other)
     {
-        //if (player == null) return;
-
-        // if ( DistanceToPlayer() <= chaseDistance)
-        // {
-        //     Debug.Log("추적 시작!");
-        // }
+        if (other.gameObject.CompareTag("Player"))
+        {
+            enemyStateManager.currentTarget = other.transform;
+        }
     }
 
-    // float DistanceToPlayer()
-    // {
-    //     GameObject player = GameObject.FindWithTag("Player");
-    //     return Vector3.Distance(transform.position, player.transform.position);
-    // }
 }
 

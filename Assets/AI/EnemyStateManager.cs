@@ -1,8 +1,24 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyStateManager : MonoBehaviour
 {
     public IEnemyState CurrentState;
+    public Transform currentTarget;
+    public Animator animator;
+    public NavMeshAgent agent;
+    public SimplePatrol simplePatrol;
+    public EnemyDateManger enemyDataManager;
+    
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        simplePatrol = GetComponent<SimplePatrol>();
+        enemyDataManager = GetComponent<EnemyDateManger>();
+
+    }
 
     void Start()
     {

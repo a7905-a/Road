@@ -4,26 +4,27 @@ public class IdleState : IEnemyState
 {
     float idleTime;
     float timer;
+    static readonly int IdleHash = Animator.StringToHash("Idle");
 
     public void EnterState(EnemyStateManager enemy)
     {
-        enemy.GetComponent<Animator>().Play("Idle");
+        enemy.animator.Play(IdleHash);
         idleTime = Random.Range(1f, 4f);
         timer = 0f;
     }
 
     public void ExitState(EnemyStateManager enemy)
     {
-        Debug.Log("[Idle State] : State Exited");
+        
     }
 
     public void UpdateState(EnemyStateManager enemy)
     {
-        //  if (enemy.GetComponent<EnemySight>().IsPlayerInSight())
-        // {
-        //     enemy.TransitionToState(new ChaseState());
-        //     return;
-        // }
+        if (enemy.currentTarget != null)
+        {
+            enemy.TransitionToState(new ChaseState());
+            return;
+        }
 
         timer += Time.deltaTime;
         if (timer >= idleTime)
