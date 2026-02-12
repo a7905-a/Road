@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   EnemyName: Text Enemy 0
   EnemyDescription: 
-  MaxHP: 5
+  MaxHP: 1
   Damage: 10
-  MoveSpeed: 5
+  AttackRange: 0

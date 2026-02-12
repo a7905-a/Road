@@ -6,62 +6,53 @@ public class ChaseState : IEnemyState
 {
     float chaseTime = 2f;
     float chaseTimer = 0;
+    static readonly int ChaseHash = Animator.StringToHash("Chase");
     public void EnterState(EnemyStateManager enemy)
     {
-        enemy.GetComponent<Animator>().Play("chase");
+        enemy.animator.Play(ChaseHash);
+        
         chaseTimer = 0f;
     }
 
     public void ExitState(EnemyStateManager enemy)
     {
-        Debug.Log("[Chase State] : State Exited");
+        
     }
 
     public void UpdateState(EnemyStateManager enemy)
     {
         chaseTimer += Time.deltaTime;
-        //Transform player = enemy.Player;
+        if (enemy.currentTarget != null)
+        {
+            chaseTimer = 0;
+        }
 
-        // bool playerVisible = enemy.GetComponent<EnemySight>().IsPlayerInSight();
-        // if (playerVisible)
-        // {
-        //     chaseTimer = 0f; 
-        // } 
-            
+        if (enemy.currentTarget == null && chaseTimer >= chaseTime)
+        {
+            if (Random.value > 0.5f)
+            {
+                enemy.TransitionToState(new IdleState());
+            }
+            else
+            {
+                enemy.TransitionToState(new PatrolState());
+            }
+            return;
+        }
 
-        // if(!playerVisible && chaseTimer >= chaseTime)
-        // {
-        //     if (Random.value > 0.5f)
-        //     {
-        //         enemy.TransitionToState(new IdleState());
-        //     }
-        //     else
-        //     {
-        //         enemy.TransitionToState(new PatrolState());
-        //     }
-        //     return;
-        // }
+        if (enemy.currentTarget != null)
+        {
+            enemy.agent.SetDestination(enemy.currentTarget.position);
 
-        // if (player != null)
-        // {
-        //     Vector3 dir = (player.position - enemy.transform.position).normalized;
-        //     enemy.rb.velocity = new Vector3(dir.x * enemy.GetComponent<EnemyDateManger>().enemyDate.ChaseSpeed, 0f);
+            float dist = Vector3.Distance(enemy.transform.position, enemy.currentTarget.position);
+            if (dist <= enemy.enemyDataManager.enemyDate.AttackRange)
+            {
+                
+                enemy.TransitionToState(new AttackState());
+                //공격범위 내 플레이어가 있다면 공격상태로 전환
+            }
+        }
 
-        //     if (dir.x != 0)
-        //     {
-        //         Vector3 scale = enemy.transform.localScale;
-        //         Scale.s = -Mathf.Sign(dir.x) * Mathf.Abs(scale.x);
-        //         enemy.transform.localScale = scale;
-        //     }
-
-        //     float dist = Vector3.Distance(enemy.transform.position, player.position);
-        //     if (dist <= enemy.GetComponent<EnemyDateManger>().enemyDate.AttackRange)
-        //     {
-        //         enemy.rb.velocity = Vector3.zero;
-        //         enemy.TransitionToState(new AttackState());
-        //         //공격범위 내 플레이어가 있다면 공격상태로 전환
-        //     }
-        // }
     }
 
 }
