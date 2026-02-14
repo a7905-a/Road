@@ -8,7 +8,7 @@ public class Unit : BaseUnit
     protected override void Start()
     {
         base.Start();
-        UnitSelectionManager.Instance.allUnitsList.Add(gameObject);
+        UnitSelectionManager.Instance.AddUnit(gameObject);
     }
 
     void Update()
@@ -27,7 +27,7 @@ public class Unit : BaseUnit
 
     protected override void Retire()
     {
-        UnitSelectionManager.Instance.allUnitsList.Remove(gameObject);
+        UnitSelectionManager.Instance.RemoveUnit(gameObject);
         base.Retire();
     }
 

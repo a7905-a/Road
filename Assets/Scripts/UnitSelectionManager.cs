@@ -1,23 +1,23 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnitSelectionManager : MonoBehaviour
 {
-    public static UnitSelectionManager Instance { get; set; }
+    public static UnitSelectionManager Instance { get; private set; }
 
     //메모리 효율성을 더 올릴려면 new List<GameObject>(100) 처럼 이렇게 미리 크기를 지정해주는게 좋다.
-    public List<GameObject> allUnitsList = new List<GameObject>();
-    public List<GameObject> unitsSelected = new List<GameObject>();
+    //리스트에 유닛이 추가, 없어지게 하는건 메서드 만을 사용해야 하기 때문에 읽기 전용으로 설정
+    [SerializeField] List<GameObject> allUnitsList = new List<GameObject>();
+    public IReadOnlyList<GameObject> AllUnitList => allUnitsList;
+
+    [SerializeField] List<GameObject> unitsSelected = new List<GameObject>();
+    public IReadOnlyList<GameObject> SelectedUnits => unitsSelected;
     
     [SerializeField] LayerMask clickable;
     [SerializeField] LayerMask ground;
-
-    // 나중에 프로퍼티로 변경
-    public LayerMask attackable;
-    public bool attackCursorVisible;
+    [SerializeField] LayerMask attackable;
     [SerializeField] GameObject groundMarker; 
+    [SerializeField] bool attackCursorVisible;
     Camera cam;
 
     void Awake()
@@ -45,6 +45,7 @@ public class UnitSelectionManager : MonoBehaviour
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             
             //클릭 가능한 오브젝트를 체크
+            //Shift키 누르면서 체크하면 다중 체크
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, clickable))
             {
                 if (Input.GetKey(KeyCode.LeftShift))
@@ -57,12 +58,13 @@ public class UnitSelectionManager : MonoBehaviour
                 }
             }
             //클릭 가능하지 않은 오브젝트를 체크
+            //땅 클릭 시 유닛 리스트를 비우기
             else
             {
                 if (!Input.GetKey(KeyCode.LeftShift))
                 {
                     
-                    DeselectAll();
+                    ClearSelection();
                 }
                 
             }
@@ -85,7 +87,7 @@ public class UnitSelectionManager : MonoBehaviour
         }
 
         // 공격 대상
-        if (unitsSelected.Count > 0 && OffensiveUnit(unitsSelected))
+        if (unitsSelected.Count > 0)
         {
             RaycastHit hit;
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -117,20 +119,7 @@ public class UnitSelectionManager : MonoBehaviour
 
     }
 
-    bool OffensiveUnit(List<GameObject> unitsSelected)
-    {
-        foreach (GameObject unit in unitsSelected)
-        {
-        if (unit.GetComponent<AttackController>())
-            {
-                return true;
-            }
-
-        }
-        return false;
-    }
-
-    public void DeselectAll()
+    public void ClearSelection()
     {
         foreach (GameObject unit in unitsSelected)
         {
@@ -140,6 +129,21 @@ public class UnitSelectionManager : MonoBehaviour
         groundMarker.SetActive(false);
 
         unitsSelected.Clear();
+    }
+
+    public void AddUnit(GameObject gameObject)
+    {
+        if (!allUnitsList.Contains(gameObject))
+        {
+            allUnitsList.Add(gameObject);
+        }
+    }
+    public void RemoveUnit(GameObject gameObject)
+    {
+        if (allUnitsList.Contains(gameObject))
+        {
+            allUnitsList.Remove(gameObject);
+        }
     }
 
 
@@ -161,7 +165,7 @@ public class UnitSelectionManager : MonoBehaviour
 
     void SelectByClick(GameObject unit)
     {
-        DeselectAll();
+        ClearSelection();
 
         unitsSelected.Add(unit);
 

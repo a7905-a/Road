@@ -35,7 +35,7 @@ public class UnitSelectionBox : MonoBehaviour
         {
             if (boxVisual.rect.width > 0 || boxVisual.rect.height > 0)
             {
-                UnitSelectionManager.Instance.DeselectAll();
+                UnitSelectionManager.Instance.ClearSelection();
                 
                 SelectUnits();
             }
@@ -44,37 +44,35 @@ public class UnitSelectionBox : MonoBehaviour
             DrawVisual();
             DrawSelection();
         }
- 
-        // When Releasing
+
+        // 마우스에서 손 떼는 순간
         if (Input.GetMouseButtonUp(0))
         {
             SelectUnits();
- 
+
             startPosition = Vector2.zero;
             endPosition = Vector2.zero;
             DrawVisual();
         }
     }
- 
+
     void DrawVisual()
     {
-        // Calculate the starting and ending positions of the selection box.
+
         Vector2 boxStart = startPosition;
         Vector2 boxEnd = endPosition;
- 
-        // Calculate the center of the selection box.
+
+        // 상자의 정중앙을 위치로 잡기 위한 식
         Vector2 boxCenter = (boxStart + boxEnd) / 2;
- 
-        // Set the position of the visual selection box based on its center.
         boxVisual.position = boxCenter;
- 
-        // Calculate the size of the selection box in both width and height.
+
+        // 어느 방향으로 드래그 하든 무조건 양수가 나와야 하니 절대값을 씌워줌
         Vector2 boxSize = new Vector2(Mathf.Abs(boxStart.x - boxEnd.x), Mathf.Abs(boxStart.y - boxEnd.y));
- 
-        // Set the size of the visual selection box based on its calculated size.
+
+        // 구한 값을 UI 인스펙터 창의 Width와 Height에 대입
         boxVisual.sizeDelta = boxSize;
     }
- 
+
     void DrawSelection()
     {
         if (Input.mousePosition.x < startPosition.x)
@@ -87,8 +85,7 @@ public class UnitSelectionBox : MonoBehaviour
             selectionBox.xMin = startPosition.x;
             selectionBox.xMax = Input.mousePosition.x;
         }
- 
- 
+
         if (Input.mousePosition.y < startPosition.y)
         {
             selectionBox.yMin = Input.mousePosition.y;
@@ -100,10 +97,10 @@ public class UnitSelectionBox : MonoBehaviour
             selectionBox.yMax = Input.mousePosition.y;
         }
     }
- 
+
     void SelectUnits()
     {
-        foreach (var unit in UnitSelectionManager.Instance.allUnitsList)
+        foreach (var unit in UnitSelectionManager.Instance.AllUnitList)
         {
             if (unit.CompareTag("Enemy")) continue;
             

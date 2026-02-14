@@ -18,4 +18,4 @@ MonoBehaviour:
   MaxHealth: 50
   Damage: 20
   AttackRate: 1.5
-  AttackRange: 10
+  AttackRange: 7
