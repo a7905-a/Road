@@ -15,7 +15,7 @@ MonoBehaviour:
   UnitName: "\uC804\uBC29"
   UnitDescription: "\uC804\uBC29 \uC720\uB2DB\uC740 \uB370\uBBF8\uC9C0\uAC00 \uB0AE\uC740
     \uB300\uC2E0 \uCCB4\uB825\uC774 \uB192\uB2E4"
-  MaxHealth: 150
+  MaxHealth: 120
   Damage: 5
   AttackRate: 1.5
-  AttackRange: 8
+  AttackRange: 4

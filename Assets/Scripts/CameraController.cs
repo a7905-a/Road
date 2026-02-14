@@ -4,12 +4,12 @@ using UnityEngine.EventSystems;
 public class RTSCameraController : MonoBehaviour
 {
     // 싱글톤 패턴 -> 다른 스크립트에서 쉽게 접근 가능하지만 강한 결합이 됨
-    public static RTSCameraController instance;
-    public BoxCollider cameraConfiner;
+    public static RTSCameraController instance {get; private set;}
+    [SerializeField] BoxCollider cameraConfiner;
+    //시작 카메라 위치를 정하는 변수 
     [SerializeField] Transform startCameraTransform;
-    
     [SerializeField] Transform cameraTransform;
-    public Transform followTransform; //프로퍼티로 변경 가능
+    [SerializeField] Transform followTransform; //프로퍼티로 변경 가능
     
     Vector3 newPosition;
 
@@ -51,7 +51,8 @@ public class RTSCameraController : MonoBehaviour
         newPosition = transform.position;
 
         movementSpeed = normalSpeed;
-        //transform.position = startCameraTransform.position;
+        
+        transform.position = startCameraTransform.position;
     }
 
     void Update()
