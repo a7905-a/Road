@@ -54,11 +54,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2d689b4a95dd2448dcc4d0bb9c89ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStateManager
-  currentTarget: {fileID: 0}
+  baseUnit: {fileID: -6893216971640289433}
+  attackTimer: 0
   animator: {fileID: 542432601640653903}
   agent: {fileID: 2989409539065061351}
-  simplePatrol: {fileID: 0}
-  enemyDataManager: {fileID: 0}
+  simplePatrol: {fileID: 4801123744670119485}
+  attackController: {fileID: 0}
 --- !u!114 &8381604734277261277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,12 +67,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91168006756762280}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a93de5abd85810d429b6b8616cf47982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDateManger
-  enemyDate: {fileID: 0}
+  enemyDate: {fileID: 11400000, guid: 6858de0e766df294485224b5460a2383, type: 2}
 --- !u!114 &-6893216971640289433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,9 +85,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b083fd43c4e454eb8b9abf1c2ed3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  unitData: {fileID: 0}
-  healthTracker: {fileID: 0}
-  enemyStateManager: {fileID: 5373805944538285207}
+  unitData: {fileID: 11400000, guid: 0ccbef585b739014ba6630bcebff6a3d, type: 2}
+  healthTracker: {fileID: 7538252427460634127}
 --- !u!114 &8719025905070870524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +101,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackController
   targetType: 0
   targetToAttack: {fileID: 0}
-  unitDamage: 10
 --- !u!114 &4801123744670119485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +300,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 725338605063410085, guid: c0fb8fcb57b244e4eb6dbc7b287d77cf, type: 3}
+      propertyPath: healthBarSlider
+      value: 
+      objectReference: {fileID: 4979871979478661219}
     - target: {fileID: 1546401019560054599, guid: c0fb8fcb57b244e4eb6dbc7b287d77cf, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
@@ -438,6 +441,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0fb8fcb57b244e4eb6dbc7b287d77cf, type: 3}
+--- !u!114 &4979871979478661219 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2851240447946641353, guid: c0fb8fcb57b244e4eb6dbc7b287d77cf, type: 3}
+  m_PrefabInstance: {fileID: 7101520457302210474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7538252427460634127 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 725338605063410085, guid: c0fb8fcb57b244e4eb6dbc7b287d77cf, type: 3}
+  m_PrefabInstance: {fileID: 7101520457302210474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b9b4659290bba943b276ac7026d6ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &9076919203913086378 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2268154870278373888, guid: c0fb8fcb57b244e4eb6dbc7b287d77cf, type: 3}

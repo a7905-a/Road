@@ -21,6 +21,8 @@ public class Unit : BaseUnit
         {
             animator.SetBool("Moving", false);
         }
+
+        Debug.Log(currentHealth);
     }
 
     protected override void Retire()

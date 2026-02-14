@@ -17,4 +17,5 @@ MonoBehaviour:
     \uB300\uC2E0 \uCCB4\uB825\uC774 \uB192\uB2E4"
   MaxHealth: 150
   Damage: 5
+  AttackRate: 1.5
   AttackRange: 8

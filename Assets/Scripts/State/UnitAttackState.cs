@@ -6,45 +6,41 @@ public class UnitAttackState : StateMachineBehaviour
 {
     NavMeshAgent agent;
     AttackController attackController;
-    Unit unit;
-
-
-
-    public float attackRate = 2f;
+    BaseUnit baseUnit;
+    Move move;
     float attackTimer;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent = animator.GetComponent<NavMeshAgent>();
         attackController = animator.GetComponent<AttackController>();
-        unit = animator.GetComponent<Unit>();
-        attackController.SetAttackMaterial();
+        baseUnit = animator.GetComponent<BaseUnit>();
+        move = animator.GetComponent<Move>();
 
         agent.ResetPath();
         agent.velocity = Vector3.zero;
     }
-
-
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.GetComponent<Move>().isCommandedMove == true)
+        if (move.isCommandedMove == true)
         {
         //공격 상태 즉시 해제
         animator.SetBool("Attack", false);
         
-        //이동 상태 켜주기
+        //이동 상태 즉시 활성화
         animator.SetBool("Moving", true); 
         
-        return; // 아래 공격 로직 실행하지 말고 바로 리턴
+        return; // 아래 공격 로직 실행X
         }
 
-        if (attackController.targetToAttack != null && animator.transform.GetComponent<Move>().isCommandedMove == false)
+        if (attackController.targetToAttack != null && move.isCommandedMove == false)
         {
             LookAtTarget();
 
             if (attackTimer <= 0)
             {
                 Attack();
-                attackTimer = 1f / attackRate;
+                Debug.Log("Player Attack");
+                attackTimer = 1f / baseUnit.unitData.AttackRate;
             }
             else
             {
@@ -53,13 +49,13 @@ public class UnitAttackState : StateMachineBehaviour
             
             float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
 
-            if (distanceFromTarget > unit.unitData.AttackRange || attackController.targetToAttack == null)
+            if (distanceFromTarget > baseUnit.unitData.AttackRange || attackController.targetToAttack == null)
             {
                 animator.SetBool("Attack", false);
             }
 
         }
-        else
+        else 
         {
             animator.SetBool("Attack", false);
         }
@@ -67,16 +63,15 @@ public class UnitAttackState : StateMachineBehaviour
 
     void Attack()
 {
-    // 1. 방어 코드: 타겟이 사라졌는지 먼저 확인
+    //타겟이 사라졌는지 먼저 확인
     if (attackController.targetToAttack == null) return;
     
-    float damageToInflict = unit.unitData.Damage; // 오타 수정 (Io -> To)
+    float damageToInflict = baseUnit.unitData.Damage;
 
-    // 2. 핵심 수정: <Unit> 대신 부모 클래스인 <BaseUnit> (또는 LivingEntity) 사용
-    // 이렇게 해야 Unit(플레이어)이든 Enemy(적)든 가리지 않고 "체력 있는 놈"은 다 때립니다.
+    //데미지를 넣을 수 있는 대상의 정보를 불러오기
     BaseUnit targetEntity = attackController.targetToAttack.GetComponent<BaseUnit>();
 
-    // 3. 안전 장치: 정말로 때릴 수 있는 상대인지 확인 후 데미지
+    //정말로 때릴 수 있는 상대인지 확인 후 데미지
     if (targetEntity != null)
     {
         targetEntity.TakeDamage(damageToInflict);

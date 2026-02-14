@@ -4,18 +4,17 @@ using UnityEngine.AI;
 public class UnitFollowState : StateMachineBehaviour
 {
     AttackController attackController;
-    Unit unit;
+    BaseUnit baseUnit;
     NavMeshAgent agent;
-
-    //public float attackDistance = 1f;
+    Move move;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        attackController = animator.transform.GetComponent<AttackController>();
+        attackController = animator.GetComponent<AttackController>();
         agent = animator.transform.GetComponent<NavMeshAgent>();
-        unit = animator.GetComponent<Unit>();
-        attackController.SetFollowMaterial();
+        baseUnit = animator.GetComponent<BaseUnit>();
+        move = animator.GetComponent<Move>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -27,18 +26,20 @@ public class UnitFollowState : StateMachineBehaviour
         }
         else
         {
-            if (animator.transform.GetComponent<Move>().isCommandedMove == false)
+            if (move.isCommandedMove == false)
             {
                 float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
-                if (distanceFromTarget <= unit.unitData.AttackRange)
+
+                if (distanceFromTarget <= baseUnit.unitData.AttackRange)
                 {
-                    
-                    animator.transform.LookAt(attackController.targetToAttack); // 휙 돌아버리까 Slerp로 보안
+                    //사거리 내부로 들어오면 공격 조건 활성화
+                    animator.transform.LookAt(attackController.targetToAttack);
                     animator.SetBool("Attack", true);
                     
                 }
                 else
                 {
+                    //사거리 밖이라면 추격
                     agent.SetDestination(attackController.targetToAttack.position);
                     
                 }
