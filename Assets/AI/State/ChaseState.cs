@@ -22,12 +22,12 @@ public class ChaseState : IEnemyState
     public void UpdateState(EnemyStateManager enemy)
     {
         chaseTimer += Time.deltaTime;
-        if (enemy.currentTarget != null)
+        if (enemy.attackController.targetToAttack != null)
         {
             chaseTimer = 0;
         }
 
-        if (enemy.currentTarget == null && chaseTimer >= chaseTime)
+        if (enemy.attackController.targetToAttack == null && chaseTimer >= chaseTime)
         {
             if (Random.value > 0.5f)
             {
@@ -40,12 +40,12 @@ public class ChaseState : IEnemyState
             return;
         }
 
-        if (enemy.currentTarget != null)
+        if (enemy.attackController.targetToAttack != null)
         {
-            enemy.agent.SetDestination(enemy.currentTarget.position);
+            enemy.agent.SetDestination(enemy.attackController.targetToAttack.position);
 
-            float dist = Vector3.Distance(enemy.transform.position, enemy.currentTarget.position);
-            if (dist <= enemy.enemyDataManager.enemyDate.AttackRange)
+            float dist = Vector3.Distance(enemy.transform.position, enemy.attackController.targetToAttack.position);
+            if (dist <= enemy.baseUnit.unitData.AttackRange)
             {
                 
                 enemy.TransitionToState(new AttackState());

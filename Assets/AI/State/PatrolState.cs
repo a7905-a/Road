@@ -17,7 +17,7 @@ public class PatrolState : IEnemyState
     public void UpdateState(EnemyStateManager enemy)
     {
         
-        if (enemy.currentTarget != null)
+        if (enemy.attackController.targetToAttack != null)
         {
             enemy.TransitionToState(new ChaseState());
             return;

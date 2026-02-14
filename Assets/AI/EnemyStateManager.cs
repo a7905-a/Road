@@ -3,12 +3,13 @@ using UnityEngine.AI;
 
 public class EnemyStateManager : MonoBehaviour
 {
+    public BaseUnit baseUnit;
     public IEnemyState CurrentState;
-    public Transform currentTarget;
+    public float attackTimer;
     public Animator animator;
     public NavMeshAgent agent;
     public SimplePatrol simplePatrol;
-    public EnemyDateManger enemyDataManager;
+    public AttackController attackController;
     
 
     void Awake()
@@ -16,7 +17,8 @@ public class EnemyStateManager : MonoBehaviour
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         simplePatrol = GetComponent<SimplePatrol>();
-        enemyDataManager = GetComponent<EnemyDateManger>();
+        baseUnit = GetComponent<BaseUnit>();
+        attackController = GetComponent<AttackController>();
 
     }
 
@@ -33,6 +35,7 @@ public class EnemyStateManager : MonoBehaviour
 
     public void TransitionToState(IEnemyState newState)
     {
+        Debug.Log($"상태 전환: {CurrentState?.GetType().Name} -> {newState.GetType().Name}");
         // CurrentState?는 CurrentState가 null이 아닐 때만 실행되도록 하는 null 조건부 연산자
         CurrentState?.ExitState(this);
         CurrentState = newState;

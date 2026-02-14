@@ -11,7 +11,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] AttackTargetType targetType;
     public Transform targetToAttack;
 
-    public int  unitDamage; //so로 변경 예정
+    //public int  unitDamage; //so로 변경 예정
     string cachedTargetTag;
     void Awake()
     {
@@ -41,23 +41,4 @@ public class AttackController : MonoBehaviour
             targetToAttack = null;
         }
     }
-
-
-    public void SetIdleMaterial()
-    {
-        //GetComponent<Renderer>().material = idleStateMaterial;
-    }
-
-    public void SetFollowMaterial()
-    {
-        //GetComponent<Renderer>().material = followStateMaterial;
-    }
-
-    public void SetAttackMaterial()
-    {
-       //GetComponent<Renderer>().material = attackStateMaterial;
-    }
-
-
-    
 }

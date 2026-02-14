@@ -7,12 +7,12 @@ public class HealthTracker : MonoBehaviour
     [SerializeField] Material greenEmission;
     [SerializeField] Material yellowEmission;
     [SerializeField] Material redEmission;
-    [SerializeField] Slider HealthBarSlider;
+    [SerializeField] Slider healthBarSlider;
 
     public void UpdateSliderValue(float currentHealth, float maxHealth)
     {
         float healthPercentage = Mathf.Clamp01(currentHealth / maxHealth);
-        HealthBarSlider.value = healthPercentage;
+        healthBarSlider.value = healthPercentage;
 
         UpdateColor(healthPercentage);
     }
