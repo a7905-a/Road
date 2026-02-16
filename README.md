@@ -42,3 +42,14 @@
 // [After] 내부는 List로 관리하되, 외부는 읽기 전용으로만 공개
 [SerializeField] private List<GameObject> _allUnits = new List<GameObject>();
 public IReadOnlyList<GameObject> AllUnits => _allUnits;
+```
+
+<br>
+
+### C. Raycast와 NavMesh를 활용한 RTS 이동 시스템
+3인칭 탑뷰 시점에서 플레이어의 입력 정확히 월드 좌표로 변환하고 Raycast와 NavMesh를 사용하여 이동 로직을 구현했습니다.
+
+* **좌표 획득 (Raycast):**
+  카메라에서 마우스 화면 좌표로 광선 Ray을 투사하여, Ground 레이어로 지정된 바닥과의 충돌 지점(`Vector3`)을 정밀하게 감지합니다.
+* **경로 계산 및 이동 (NavMeshAgent):**
+  획득한 월드 좌표를 `NavMeshAgent`의 목적지로 설정합니다. 이를 통해 유닛은 **NavMesh** 데이터를 기반으로 장애물을 자동으로 회피하며 최적의 경로로 이동합니다.
