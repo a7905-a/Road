@@ -39,7 +39,7 @@ public class UnitAttackState : StateMachineBehaviour
             if (attackTimer <= 0)
             {
                 Attack();
-                Debug.Log("Player Attack");
+                
                 attackTimer = 1f / baseUnit.unitData.AttackRate;
             }
             else

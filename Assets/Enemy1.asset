@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
   UnitName: 
   UnitDescription: 
+  muzzleFlash: {fileID: 0}
+  hitEffect: {fileID: 7197857826735971455, guid: e464c1dbd80570446b11622f4c3f27ba, type: 3}
   MaxHealth: 34
   Damage: 5
   AttackRate: 1.5

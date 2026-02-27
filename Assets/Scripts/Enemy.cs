@@ -1,8 +1,10 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : BaseUnit
 {
+    [SerializeField] Transform damagePoint;
     
     protected override void Awake()
     {
@@ -14,6 +16,13 @@ public class Enemy : BaseUnit
         base.Start();
     }
 
+    protected override void OnHit()
+    {
+        if (damagePoint != null)
+        {
+            Instantiate(unitData.hitEffect, damagePoint.position, damagePoint.rotation);
+        }
+    }
     protected override void Retire()
     {
         base.Retire();

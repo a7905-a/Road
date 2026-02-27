@@ -39,6 +39,7 @@ public class UnitFollowState : StateMachineBehaviour
                 }
                 else
                 {
+                    if (move.isHolding) return;
                     //사거리 밖이라면 추격
                     agent.SetDestination(attackController.targetToAttack.position);
                     
