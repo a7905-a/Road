@@ -11,7 +11,6 @@ public class AttackController : MonoBehaviour
     [SerializeField] AttackTargetType targetType;
     public Transform targetToAttack;
 
-    //public int  unitDamage; //so로 변경 예정
     string cachedTargetTag;
     void Awake()
     {

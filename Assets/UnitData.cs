@@ -7,6 +7,8 @@ public class UnitData : ScriptableObject
     [TextArea]
     public string UnitDescription;
 
+    public ParticleSystem muzzleFlash;
+    public ParticleSystem hitEffect;
     public float MaxHealth;
     public float Damage;
     public float AttackRate;

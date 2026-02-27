@@ -32,10 +32,12 @@ public class UnitIdleState : StateMachineBehaviour
             
             // 공격 애니메이션 조건 활성화
             animator.SetBool("Attack", true);
+            
         }
         //사거리 밖이라면 추격
         else
         {
+            if (move.isHolding) return;
             animator.SetBool("Follow", true);
         }
     }

@@ -32,6 +32,7 @@ public class BaseUnit : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        OnHit();    
 
         if (healthTracker != null && unitData != null)
             healthTracker.UpdateSliderValue(currentHealth, unitData.MaxHealth);
@@ -45,4 +46,7 @@ public class BaseUnit : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    protected virtual void OnHit()
+    { }
 }

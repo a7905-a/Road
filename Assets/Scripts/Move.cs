@@ -7,6 +7,7 @@ public class Move : MonoBehaviour
     Camera cam;
     NavMeshAgent agent;
     public bool isCommandedMove;
+    public bool isHolding;
 
     void Awake()
     {
@@ -20,8 +21,21 @@ public class Move : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            isHolding = !isHolding;
+            agent.SetDestination(transform.position);
+            isCommandedMove = false;
+            
+        }
+
         if (Input.GetMouseButtonDown(1))
         {
+            if (isHolding)
+            {
+                isHolding = false;
+            }
+
             if (MoveToCursor())
             {
                 return;
