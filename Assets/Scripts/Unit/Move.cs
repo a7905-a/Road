@@ -72,7 +72,7 @@ public class Move : MonoBehaviour
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             //sqrMagnitude는 제곱합만 가져옴
-            //유닛의 속도가 0인가를 확인할 때 속도가 0이라면 속도의 제곱도 0이다. 결과는 똑같은데 sqrMagnitude는 루트 계산을 생략할 수 있어서 성능최적화에서 이점을 가짐
+            //유닛의 속도가 0인가를 확인할 때 속도가 0이라면 속도의 제곱도 0이다. 결과는 똑같은데 sqrMagnitude는 루트 계산을 생략할 수 있어서 성능최적화에서 이득
             if (!agent.hasPath || agent.velocity.sqrMagnitude == 0)
             {
                 isCommandedMove = false;
