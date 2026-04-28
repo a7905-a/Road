@@ -1,43 +1,46 @@
 using UnityEngine;
 
-public enum AttackTargetType
+namespace ProjectRoad.Controller
 {
-    Player,
-    Enemy
-}
-
-public class AttackController : MonoBehaviour
-{
-    [SerializeField] AttackTargetType targetType;
-    public Transform targetToAttack;
-
-    string cachedTargetTag;
-    void Awake()
+    public enum AttackTargetType
     {
-        cachedTargetTag = targetType.ToString();
+        Player,
+        Enemy
     }
 
-    void OnTriggerEnter(Collider other)
+    public class AttackController : MonoBehaviour
     {
-        if (other.CompareTag(cachedTargetTag) && targetToAttack == null)
+        [SerializeField] AttackTargetType targetType;
+        public Transform targetToAttack;
+
+        string cachedTargetTag;
+        void Awake()
         {
-            targetToAttack = other.transform;
+            cachedTargetTag = targetType.ToString();
         }
-    }
 
-    void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag(cachedTargetTag) && targetToAttack == null)
+        void OnTriggerEnter(Collider other)
         {
-            targetToAttack = other.transform;
+            if (other.CompareTag(cachedTargetTag) && targetToAttack == null)
+            {
+                targetToAttack = other.transform;
+            }
         }
-    }
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag(cachedTargetTag) && targetToAttack != null)
+        void OnTriggerStay(Collider other)
         {
-            targetToAttack = null;
+            if (other.CompareTag(cachedTargetTag) && targetToAttack == null)
+            {
+                targetToAttack = other.transform;
+            }
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag(cachedTargetTag) && targetToAttack != null)
+            {
+                targetToAttack = null;
+            }
         }
     }
 }

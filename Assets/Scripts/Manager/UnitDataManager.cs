@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class UnitDataManager : MonoBehaviour
+namespace ProjectRoad.Manager
 {
-    public UnitData frontUnitData;
-    public UnitData backUnitData;
+    public class UnitDataManager : MonoBehaviour
+    {
+        public UnitData frontUnitData;
+        public UnitData backUnitData;
+    }
 }

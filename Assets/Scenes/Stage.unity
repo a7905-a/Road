@@ -2150,6 +2150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerUnit 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8612330369151271055, guid: 9f5c7de288ea87c458962e0560afd7f7, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 9057581993181939182, guid: 9f5c7de288ea87c458962e0560afd7f7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5634,13 +5638,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0.46792975, y: 0, z: 0, w: 0.8837657}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 578423283}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 55.8, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9195,7 +9199,7 @@ Transform:
   m_GameObject: {fileID: 578423282}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40.7, y: 15, z: 25.2}
+  m_LocalPosition: {x: -40.52, y: 23.8, z: 25.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12674,6 +12678,10 @@ PrefabInstance:
     - target: {fileID: 7270825284962661954, guid: 479cfa344a1a85c4784cb66208b00f24, type: 3}
       propertyPath: m_Name
       value: PlayerUnit 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612330369151271055, guid: 479cfa344a1a85c4784cb66208b00f24, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9057581993181939182, guid: 479cfa344a1a85c4784cb66208b00f24, type: 3}
       propertyPath: m_AnchorMax.x
@@ -16924,6 +16932,14 @@ PrefabInstance:
     - target: {fileID: 7270825284962661954, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: m_Name
       value: PlayerUnit
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612330369151271055, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: m_AutoBraking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612330369151271055, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9057581993181939182, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: m_AnchorMax.x
