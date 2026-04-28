@@ -148,6 +148,11 @@ namespace ProjectRoad.Manager
             {
                 allUnitsList.Remove(gameObject);
             }
+
+            if (unitsSelected.Contains(gameObject))
+            {
+                unitsSelected.Remove(gameObject);
+            }
         }
 
 
