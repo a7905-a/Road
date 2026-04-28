@@ -1,52 +1,55 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BaseUnit : MonoBehaviour
+namespace ProjectRoad.Unit
 {
-    [Header("같이 받는 데이터")]
-    public UnitData unitData;
-    [SerializeField] protected HealthTracker healthTracker;
-
-    protected float currentHealth;
-    protected NavMeshAgent agent;
-    protected Animator animator;
-
-    protected virtual void Awake()
+    public class BaseUnit : MonoBehaviour
     {
-        agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-    }
+        [Header("같이 받는 데이터")]
+        public UnitData unitData;
+        [SerializeField] protected HealthTracker healthTracker;
 
-    protected virtual void Start()
-    {
-        if (unitData != null)
+        protected float currentHealth;
+        protected NavMeshAgent agent;
+        protected Animator animator;
+
+        protected virtual void Awake()
         {
-            currentHealth = unitData.MaxHealth;
-            if (healthTracker != null)
+            agent = GetComponent<NavMeshAgent>();
+            animator = GetComponent<Animator>();
+        }
+
+        protected virtual void Start()
+        {
+            if (unitData != null)
             {
-                healthTracker.UpdateSliderValue(currentHealth, unitData.MaxHealth);
+                currentHealth = unitData.MaxHealth;
+                if (healthTracker != null)
+                {
+                    healthTracker.UpdateSliderValue(currentHealth, unitData.MaxHealth);
+                }
             }
         }
-    }
-    // 데미지 공통 메서드
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-        OnHit();    
-
-        if (healthTracker != null && unitData != null)
-            healthTracker.UpdateSliderValue(currentHealth, unitData.MaxHealth);
-
-        if (currentHealth <= 0)
+        // 데미지 공통 메서드
+        public void TakeDamage(float damage)
         {
-            Retire();
-        }
-    }
-    protected virtual void Retire()
-    {
-        Destroy(gameObject);
-    }
+            currentHealth -= damage;
+            OnHit();    
 
-    protected virtual void OnHit()
-    { }
+            if (healthTracker != null && unitData != null)
+                healthTracker.UpdateSliderValue(currentHealth, unitData.MaxHealth);
+
+            if (currentHealth <= 0)
+            {
+                Retire();
+            }
+        }
+        protected virtual void Retire()
+        {
+            Destroy(gameObject);
+        }
+
+        protected virtual void OnHit()
+        { }
+    }
 }
