@@ -10,16 +10,18 @@ namespace ProjectRoad.Unit
     {
         [SerializeField] Transform attackPoint;
         [SerializeField] Transform hitPoint;
+        Move move;
         
         protected override void Start()
         {
             base.Start();
             UnitSelectionManager.Instance.AddUnit(gameObject);
+            move = GetComponent<Move>();
         }
 
         void Update()
         {
-            if (agent.remainingDistance > agent.stoppingDistance)
+            if (move.isCommandedMove)
             {
                 animator.SetBool("Moving", true);
             }

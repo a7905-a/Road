@@ -747,6 +747,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 740853658}
     m_Modifications:
+    - target: {fileID: 5295558347671789, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: stuckTimeThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3291251504338135218, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: facingCamera
       value: 
@@ -1375,6 +1379,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 740853658}
     m_Modifications:
+    - target: {fileID: 5295558347671789, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: stuckTimeThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3291251504338135218, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: facingCamera
       value: 
@@ -3036,6 +3044,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 740853658}
     m_Modifications:
+    - target: {fileID: 5295558347671789, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: stuckTimeThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3291251504338135218, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: facingCamera
       value: 
@@ -9627,6 +9639,7 @@ MonoBehaviour:
     m_Bits: 128
   groundMarker: {fileID: 549692777}
   attackCursorVisible: 0
+  formationSpacing: 2
 --- !u!4 &482133088
 Transform:
   m_ObjectHideFlags: 0
@@ -13540,6 +13553,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 740853658}
     m_Modifications:
+    - target: {fileID: 5295558347671789, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: stuckTimeThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3291251504338135218, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: facingCamera
       value: 
@@ -14735,6 +14752,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 740853658}
     m_Modifications:
+    - target: {fileID: 5295558347671789, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: stuckTimeThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3291251504338135218, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: facingCamera
       value: 
@@ -21196,6 +21217,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5295558347671789, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: stuckTimeThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3291251504338135218, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: facingCamera
       value: 
@@ -21210,7 +21235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5410101967551443329, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 42.422
+      value: 43.885
       objectReference: {fileID: 0}
     - target: {fileID: 5410101967551443329, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -21251,6 +21276,10 @@ PrefabInstance:
     - target: {fileID: 8612330369151271055, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: m_AutoBraking
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612330369151271055, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: avoidancePriority
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8612330369151271055, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: m_StoppingDistance
@@ -21668,6 +21697,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 740853658}
     m_Modifications:
+    - target: {fileID: 5295558347671789, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: stuckTimeThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3291251504338135218, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: facingCamera
       value: 
@@ -24451,6 +24484,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 740853658}
     m_Modifications:
+    - target: {fileID: 5295558347671789, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: stuckTimeThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3291251504338135218, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: facingCamera
       value: 
@@ -27455,6 +27492,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 740853658}
     m_Modifications:
+    - target: {fileID: 5295558347671789, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: stuckTimeThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3291251504338135218, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: facingCamera
       value: 
@@ -30830,6 +30871,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 740853658}
     m_Modifications:
+    - target: {fileID: 5295558347671789, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: stuckTimeThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3291251504338135218, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: facingCamera
       value: 
@@ -34968,6 +35013,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 740853658}
     m_Modifications:
+    - target: {fileID: 5295558347671789, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: stuckTimeThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3291251504338135218, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: facingCamera
       value: 
@@ -38083,6 +38132,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 740853658}
     m_Modifications:
+    - target: {fileID: 5295558347671789, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
+      propertyPath: stuckTimeThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3291251504338135218, guid: 1b5ff4ac20e7f64409e54abb688eebd3, type: 3}
       propertyPath: facingCamera
       value: 

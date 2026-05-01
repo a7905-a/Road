@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ProjectRoad.Unit;
 using ProjectRoad.Controller;
+using System.Linq;
 
 namespace ProjectRoad.Manager
 {
@@ -22,6 +23,7 @@ namespace ProjectRoad.Manager
         [SerializeField] LayerMask attackable;
         [SerializeField] GameObject groundMarker; 
         [SerializeField] bool attackCursorVisible;
+        [SerializeField] float formationSpacing = 2.0f;
         Camera cam;
 
         void Awake()
@@ -86,6 +88,27 @@ namespace ProjectRoad.Manager
                     groundMarker.transform.position = hit.point;
                     groundMarker.SetActive(false);
                     groundMarker.SetActive(true);
+
+                    List<Vector3> formationPositions = SetBFSPositions(hit.point, unitsSelected.Count, formationSpacing);
+                     // 목적지에 가까운 유닛 순으로 오름차순 정렬
+                    var sortedUnits = unitsSelected.OrderBy(u => Vector3.Distance(hit.point, u.transform.position)).ToList();
+                    // 목적지에서 멀리 있는 자리 순으로 내림차순 정렬
+                    var sortedPositions = formationPositions.OrderByDescending(p => Vector3.Distance(hit.point, p)).ToList();
+
+                    for (int i = 0; i < sortedUnits.Count; i++)
+                    {
+                        // 자리가 부족할 수 있으므로 방어막
+                        if (i < sortedPositions.Count) 
+                        {
+                            Move moveScript = sortedUnits[i].GetComponent<Move>();
+                            if (moveScript != null)
+                            {
+                                moveScript.MoveToPosition(sortedPositions[i]);
+                            }
+                        }
+                    }
+
+
 
                 }
             }
@@ -205,6 +228,62 @@ namespace ProjectRoad.Manager
                 TriggerSelectionIndicator(unit, true);
                 EnableUnitMovement(unit, true);
             }
+        }
+
+        //center는 이동 기능에 사용할 레이캐스트의 hit.point, requiredCount는 선택된 유닛의 수, spacing은 유닛 간의 간격
+        List<Vector3> SetBFSPositions(Vector3 center, int requiredCount, float spacing)
+        {
+            // 최종 목적지를 담을 리스트와 BFS를 위한 큐, 방문한 위치를 담을 해시셋
+            List<Vector3> validPos = new List<Vector3>();
+            Queue<Vector2Int> queue = new Queue<Vector2Int>();
+            HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
+
+            Vector2Int startPos = Vector2Int.zero; // BFS 시작점 (0,0)
+            queue.Enqueue(startPos);
+            visited.Add(startPos);
+
+            Vector2Int[] directions = new Vector2Int[] // BFS 탐색을 위한 4방향 벡터
+            {
+                new Vector2Int(1, 0),   // 오른쪽
+                new Vector2Int(-1, 0),  // 왼쪽
+                new Vector2Int(0, 1),   // 위
+                new Vector2Int(0, -1)   // 아래
+            };
+
+            while (queue.Count > 0 && validPos.Count < requiredCount)
+            {
+                Vector2Int current = queue.Dequeue();
+                Vector3 worldPos = center + new Vector3(current.x, 0, current.y) * spacing;
+
+                if(IsValidNavMeshPosition(worldPos, out Vector3 validPoint, spacing))
+                {
+                    validPos.Add(validPoint);
+                }
+
+                foreach (Vector2Int dir in directions)
+                {
+                    Vector2Int neighborGrid = current + dir;
+                    if (!visited.Contains(neighborGrid))
+                    {
+                        visited.Add(neighborGrid);
+                        queue.Enqueue(neighborGrid);
+                    }
+                }
+            }
+            return validPos;
+        }
+        bool IsValidNavMeshPosition(Vector3 samplePoint, out Vector3 resultPoint, float maxDistance)
+        {
+            UnityEngine.AI.NavMeshHit hit;
+            // 주어진 점 주변에서 NavMesh 위를 찾음
+            if (UnityEngine.AI.NavMesh.SamplePosition(samplePoint, out hit, maxDistance / 2f, UnityEngine.AI.NavMesh.AllAreas))
+            {
+                resultPoint = hit.position;
+                return true;
+            }
+            
+            resultPoint = Vector3.zero;
+            return false;
         }
     }
 }
