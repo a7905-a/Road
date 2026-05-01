@@ -7,7 +7,7 @@ namespace ProjectRoad.Unit
     {
         [SerializeField] LayerMask ground;
         [SerializeField] float crowdRadius = 3.0f;
-        [SerializeField] float stuckTimeThreshold = 0.3f;
+        [SerializeField] float stuckTimeThreshold = 1.0f;
         float stuckTimer = 0f;
 
         Camera cam;
@@ -75,13 +75,20 @@ namespace ProjectRoad.Unit
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
-                isCommandedMove = true;
-                agent.SetDestination(hit.point);
+                //isCommandedMove = true;
+                //agent.SetDestination(hit.point);
+                MoveToPosition(hit.point);
+                agent.avoidancePriority = 50;
                 return true;
             }
             return false;
         }
 
+        public void MoveToPosition(Vector3 position)
+        {
+            isCommandedMove = true;
+            agent.SetDestination(position);
+        }
         void CheckArrived()
         {   
             //경로를 계산중이라면 true를 반환함 그래서 경로 계산이 다 끝난 상태에서 거리 계산을 해야 되서 return을 넣었다
@@ -100,10 +107,10 @@ namespace ProjectRoad.Unit
                 }
             }
 
-            if (dist <= crowdRadius) 
+            if (isCommandedMove) 
             {
-                // 속도가 거의 0에 가깝다면 (누군가에게 막혀서 못 가고 있다면)
-                if (agent.velocity.sqrMagnitude < 0.1f) 
+                //누군가에게 막혀서 못 가고 있다면
+                if (agent.velocity.sqrMagnitude < 2.5f) 
                 {
                     stuckTimer += Time.deltaTime; // 타이머 증가
 
@@ -119,17 +126,14 @@ namespace ProjectRoad.Unit
                     stuckTimer = 0f; 
                 }
             }
-            else
-            {
-                // 목표 지점 근처도 아니라면 타이머 초기화 (지나가다 맵 지형에 걸린 건 무시)
-                stuckTimer = 0f; 
-            }
+            
         }
         void StopMovement()
         {
             isCommandedMove = false;
             stuckTimer = 0f;
             agent.ResetPath();
+            agent.avoidancePriority = 0;
         }
     }
 }
