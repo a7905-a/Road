@@ -7,11 +7,16 @@ namespace ProjectRoad.Unit
     {
         [Header("같이 받는 데이터")]
         public UnitData unitData;
+        [SerializeField] protected int myUnitID;
         [SerializeField] protected HealthTracker healthTracker;
 
-        protected float currentHealth;
+        //protected float currentHealth;
         protected NavMeshAgent agent;
         protected Animator animator;
+
+        [SerializeField] protected float currentHealth;
+        [SerializeField] protected float currentDamage;
+        [SerializeField] protected float currentMoveSpeed;
 
         protected virtual void Awake()
         {
@@ -21,6 +26,24 @@ namespace ProjectRoad.Unit
 
         protected virtual void Start()
         {
+            RoadUnitData myData = DataManager.Instance.GetUnitDataByID(myUnitID);
+            if (myData != null)
+            {
+                currentHealth = myData.MaxHealth;
+                currentDamage = myData.Damage;
+                currentMoveSpeed = myData.MoveSpeed;
+                if (agent != null)
+                {
+                    agent.speed = currentMoveSpeed;
+                }
+            }
+            else
+            {
+                Debug.LogError("유닛 데이터가 없습니다.");
+            }
+
+            
+
             if (unitData != null)
             {
                 currentHealth = unitData.MaxHealth;
@@ -29,6 +52,7 @@ namespace ProjectRoad.Unit
                     healthTracker.UpdateSliderValue(currentHealth, unitData.MaxHealth);
                 }
             }
+
         }
         // 데미지 공통 메서드
         public void TakeDamage(float damage)

@@ -92,6 +92,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5179333067286015853, guid: aa74b9295344932458bf5e038dbdc25b, type: 3}
+      propertyPath: myUnitID
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179333067286015853, guid: aa74b9295344932458bf5e038dbdc25b, type: 3}
       propertyPath: unitData
       value: 
       objectReference: {fileID: 11400000, guid: 4b7e9b1280215aa44940b2199e2dc9ca, type: 2}

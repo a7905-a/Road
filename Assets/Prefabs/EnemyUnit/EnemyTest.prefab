@@ -87,7 +87,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   unitData: {fileID: 11400000, guid: 0ccbef585b739014ba6630bcebff6a3d, type: 2}
+  myUnitID: 200
   healthTracker: {fileID: 7538252427460634127}
+  currentHealth: 0
+  currentDamage: 0
+  currentMoveSpeed: 0
   damagePoint: {fileID: 5161505448682949876}
 --- !u!114 &8719025905070870524
 MonoBehaviour:
