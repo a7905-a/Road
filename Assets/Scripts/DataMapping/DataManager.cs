@@ -17,7 +17,8 @@ public class DataManager : MonoBehaviour
     public void LoadUnitData()
     {
         // 바탕화면에서 경로를 찾기
-        string jsonPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "Road_UnitMasterData.json");
+        //string jsonPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "Road_UnitMasterData.json");
+        string jsonPath = Path.Combine(Application.streamingAssetsPath, "Road_UnitMasterData.json");
 
         //괄호 안에 적힌 주소에 파일이 존재(Exists)하는지 검사하는 조건문
         if (File.Exists(jsonPath))
