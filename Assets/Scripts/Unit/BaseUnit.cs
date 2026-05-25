@@ -9,14 +9,13 @@ namespace ProjectRoad.Unit
         public UnitData unitData;
         [SerializeField] protected int myUnitID;
         [SerializeField] protected HealthTracker healthTracker;
-
-        //protected float currentHealth;
-        protected NavMeshAgent agent;
-        protected Animator animator;
-
         [SerializeField] protected float currentHealth;
         [SerializeField] protected float currentDamage;
         [SerializeField] protected float currentMoveSpeed;
+
+        
+        protected NavMeshAgent agent;
+        protected Animator animator;
 
         protected virtual void Awake()
         {
