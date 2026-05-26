@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1787908698333876221}
   - component: {fileID: 5373805944538285207}
-  - component: {fileID: 8381604734277261277}
   - component: {fileID: -6893216971640289433}
   - component: {fileID: 8719025905070870524}
   - component: {fileID: 4801123744670119485}
@@ -41,6 +40,7 @@ Transform:
   - {fileID: 9076919203913086378}
   - {fileID: 7912017776658194206}
   - {fileID: 5161505448682949876}
+  - {fileID: 5205864402214692198}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5373805944538285207
@@ -55,25 +55,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2d689b4a95dd2448dcc4d0bb9c89ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStateManager
-  baseUnit: {fileID: -6893216971640289433}
   attackTimer: 0
   animator: {fileID: 542432601640653903}
   agent: {fileID: 2989409539065061351}
   simplePatrol: {fileID: 4801123744670119485}
+  baseUnit: {fileID: -6893216971640289433}
   attackController: {fileID: 0}
---- !u!114 &8381604734277261277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 91168006756762280}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a93de5abd85810d429b6b8616cf47982, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyDateManger
-  enemyDate: {fileID: 11400000, guid: 6858de0e766df294485224b5460a2383, type: 2}
 --- !u!114 &-6893216971640289433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,13 +73,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b083fd43c4e454eb8b9abf1c2ed3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  unitData: {fileID: 11400000, guid: 0ccbef585b739014ba6630bcebff6a3d, type: 2}
   myUnitID: 200
   healthTracker: {fileID: 7538252427460634127}
+  maxHealth: 0
   currentHealth: 0
   currentDamage: 0
   currentMoveSpeed: 0
-  damagePoint: {fileID: 5161505448682949876}
+  currentAttackRate: 0
+  currentAttackRange: 0
+  attackPoint: {fileID: 5161505448682949876}
+  hitPoint: {fileID: 5205864402214692198}
+  visualData: {fileID: 11400000, guid: 0ccbef585b739014ba6630bcebff6a3d, type: 2}
 --- !u!114 &8719025905070870524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5161505448682949876}
   m_Layer: 7
-  m_Name: DamegePoint
+  m_Name: Attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,7 +230,38 @@ Transform:
   m_GameObject: {fileID: 585111136079006980}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.517, z: 0.46}
+  m_LocalPosition: {x: 0, y: 0.692, z: 0.822}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1787908698333876221}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7371982177950431750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5205864402214692198}
+  m_Layer: 7
+  m_Name: 'Hit Point '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5205864402214692198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7371982177950431750}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.461, z: 0.464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -275,7 +297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6587773512132797618, guid: 79d8121833d763c43ae6c7b2a564705b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.291
       objectReference: {fileID: 0}
     - target: {fileID: 6587773512132797618, guid: 79d8121833d763c43ae6c7b2a564705b, type: 3}
       propertyPath: m_LocalPosition.z

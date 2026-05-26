@@ -6,14 +6,16 @@ namespace ProjectRoad.Manager
 {
     public class UnitSelectionBox : MonoBehaviour
     {
-        [SerializeField] RectTransform boxVisual;
-        Camera myCamera;
+        [Header("드레그 박스 이미지")]
+        [SerializeField] private RectTransform boxVisual;
+        private Rect selectionBox;
+        private Vector2 startPosition;
+        private Vector2 endPosition;
 
-        Rect selectionBox;
-        Vector2 startPosition;
-        Vector2 endPosition;
+        // 캐싱 컴포넌트
+        private Camera myCamera;
 
-        void Start()
+        private void Start()
         {
             myCamera = Camera.main;
             startPosition = Vector2.zero;
@@ -21,9 +23,9 @@ namespace ProjectRoad.Manager
             DrawVisual();
         }
 
-        void Update()
+        private void Update()
         {
-            // 0은 마우스 왼쪽
+            // 마우스 왼쪽 클릭 확인
             if (Input.GetMouseButtonDown(0))
             {
                 startPosition = Input.mousePosition;
@@ -58,7 +60,7 @@ namespace ProjectRoad.Manager
             }
         }
 
-        void DrawVisual()
+        private void DrawVisual()
         {
 
             Vector2 boxStart = startPosition;
@@ -75,7 +77,7 @@ namespace ProjectRoad.Manager
             boxVisual.sizeDelta = boxSize;
         }
 
-        void DrawSelection()
+        private void DrawSelection()
         {
             if (Input.mousePosition.x < startPosition.x)
             {
@@ -100,7 +102,7 @@ namespace ProjectRoad.Manager
             }
         }
 
-        void SelectUnits()
+        private void SelectUnits()
         {
             foreach (var unit in UnitSelectionManager.Instance.AllUnitList)
             {

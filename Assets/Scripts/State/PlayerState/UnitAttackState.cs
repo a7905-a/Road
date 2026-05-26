@@ -64,7 +64,7 @@ namespace ProjectRoad.State
                 
                 float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
 
-                if (distanceFromTarget > baseUnit.CurrentAttackRate || attackController.targetToAttack == null)
+                if (distanceFromTarget > baseUnit.CurrentAttackRange || attackController.targetToAttack == null)
                 {
                     animator.SetBool("Attack", false);
                 }

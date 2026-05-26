@@ -39,7 +39,7 @@ namespace ProjectRoad.Unit
         }
         public float CurrentAttackRange
         {
-             get { return currentAttackRange; }
+            get { return currentAttackRange; }
         }
 
         
@@ -62,6 +62,8 @@ namespace ProjectRoad.Unit
                 currentHealth = myData.MaxHealth;
                 currentDamage = myData.Damage;
                 currentMoveSpeed = myData.MoveSpeed;
+                currentAttackRate = myData.AttackRate;
+                currentAttackRange = myData.AttackRange;
 
                 if (agent != null)
                 {

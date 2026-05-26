@@ -11,6 +11,8 @@ namespace ProjectRoad.State
         public void EnterState(EnemyStateManager enemy)
         {
             enemy.animator.Play(AttackHash);
+            enemy.agent.ResetPath();
+            enemy.agent.velocity = Vector3.zero;
         }
 
         public void ExitState(EnemyStateManager enemy)
@@ -42,13 +44,14 @@ namespace ProjectRoad.State
                 {
                     Attack(enemy);
                     Debug.Log("Enemy Attack");
+                    
 
                     enemy.attackTimer = 1f / enemy.baseUnit.CurrentAttackRate;
                 }
 
                 float distanceFromTarget = Vector3.Distance(enemy.attackController.targetToAttack.position, enemy.transform.position);
 
-                if (distanceFromTarget > enemy.baseUnit.CurrentAttackRate)
+                if (distanceFromTarget > enemy.baseUnit.CurrentAttackRange)
                 {
                     enemy.TransitionToState(new ChaseState());
                 }

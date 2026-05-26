@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01797fdd883313549a05e5f1305299a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 91737ac3dbda2644a86853c238114d5f, type: 3}
   m_Name: Enemy
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  EnemyName: Text Enemy 0
-  EnemyDescription: 
-  MaxHP: 100
-  Damage: 5
-  AttackRange: 5
+  m_EditorClassIdentifier: Assembly-CSharp::UnitData
+  UnitDescription: 
+  hitEffect: {fileID: 6256628082000902860, guid: f87108191b336f74789962a5bfa19cbd, type: 3}
+  muzzleFlash: {fileID: 6651247000163292862, guid: bb6ae077a018e0f40b77718242bdafe3, type: 3}
+  bulletLine: {fileID: 0}

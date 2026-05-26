@@ -12,13 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91737ac3dbda2644a86853c238114d5f, type: 3}
   m_Name: Back
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
-  UnitName: "\uD6C4\uBC29"
   UnitDescription: "\uD6C4\uBC29 \uC720\uB2DB\uC740 \uB370\uBBF8\uC9C0\uAC00 \uAC15\uD55C
     \uB300\uC2E0 \uCCB4\uB825\uC774 \uB0AE\uB2E4"
+  hitEffect: {fileID: 7197857826735971455, guid: e464c1dbd80570446b11622f4c3f27ba, type: 3}
   muzzleFlash: {fileID: 6256628082000902860, guid: f87108191b336f74789962a5bfa19cbd, type: 3}
-  hitEffect: {fileID: 0}
   bulletLine: {fileID: 2388129137873954101, guid: dcb6f3454cdb27c4ab28ddeee1051919, type: 3}
-  MaxHealth: 50
-  Damage: 20
-  AttackRate: 1.5
-  AttackRange: 7

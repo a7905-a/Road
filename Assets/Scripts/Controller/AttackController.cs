@@ -10,16 +10,16 @@ namespace ProjectRoad.Controller
 
     public class AttackController : MonoBehaviour
     {
-        [SerializeField] AttackTargetType targetType;
+        [SerializeField] private AttackTargetType targetType;
         public Transform targetToAttack;
 
-        string cachedTargetTag;
-        void Awake()
+        private string cachedTargetTag;
+        private void Awake()
         {
             cachedTargetTag = targetType.ToString();
         }
 
-        void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(cachedTargetTag) && targetToAttack == null)
             {
@@ -27,7 +27,7 @@ namespace ProjectRoad.Controller
             }
         }
 
-        void OnTriggerStay(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if (other.CompareTag(cachedTargetTag) && targetToAttack == null)
             {
@@ -35,7 +35,7 @@ namespace ProjectRoad.Controller
             }
         }
 
-        void OnTriggerExit(Collider other)
+        private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag(cachedTargetTag) && targetToAttack != null)
             {
