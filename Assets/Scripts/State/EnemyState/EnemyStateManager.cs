@@ -7,16 +7,21 @@ namespace ProjectRoad.State
 {
     public class EnemyStateManager : MonoBehaviour
     {
-        public BaseUnit baseUnit;
-        public IEnemyState CurrentState;
+        // 상태 변수
         public float attackTimer;
+
+        // 캐싱 컴포넌트
         public Animator animator;
         public NavMeshAgent agent;
         public SimplePatrol simplePatrol;
+        public BaseUnit baseUnit;
         public AttackController attackController;
+
+        // 인터페이스로 정의한 상태
+        public IEnemyState CurrentState;
         
 
-        void Awake()
+        private void Awake()
         {
             animator = GetComponent<Animator>();
             agent = GetComponent<NavMeshAgent>();
@@ -26,13 +31,13 @@ namespace ProjectRoad.State
 
         }
 
-        void Start()
+        private void Start()
         {
             TransitionToState(new IdleState());
         }
 
 
-        void Update()
+        private void Update()
         {
             CurrentState?.UpdateState(this);
         }

@@ -1,31 +1,23 @@
+using System;
 using UnityEngine;
 
 namespace ProjectRoad.Unit
 {
     public class Enemy : BaseUnit
     {
-        [SerializeField] Transform damagePoint;
-        
-        protected override void Awake()
-        {
-            base.Awake();
-        }
+        [Header("VFX 위치")]
+        [SerializeField] private Transform damagePoint;
 
-        protected override void Start()
-        {
-            base.Start();
-        }
+        [Header("시각 효과")]
+        [SerializeField] private UnitVisualData visualData;
+        
 
         protected override void OnHit()
         {
-            if (damagePoint != null)
+            if (visualData != null && damagePoint != null)
             {
-                Instantiate(unitData.hitEffect, damagePoint.position, damagePoint.rotation);
+                Instantiate(visualData.hitEffect, damagePoint.position, damagePoint.rotation);
             }
-        }
-        protected override void Retire()
-        {
-            base.Retire();
         }
 
     }

@@ -4,7 +4,7 @@ namespace ProjectRoad.Manager
 {
     public class UnitDataManager : MonoBehaviour
     {
-        public UnitData frontUnitData;
-        public UnitData backUnitData;
+        // public UnitData frontUnitData;
+        // public UnitData backUnitData;
     }
 }

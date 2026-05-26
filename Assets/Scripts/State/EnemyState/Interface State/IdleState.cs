@@ -4,8 +4,8 @@ namespace ProjectRoad.State
 {
     public class IdleState : IEnemyState
     {
-        float idleTime;
-        float timer;
+        private float idleTime;
+        private float timer;
         static readonly int IdleHash = Animator.StringToHash("Idle");
 
         public void EnterState(EnemyStateManager enemy)

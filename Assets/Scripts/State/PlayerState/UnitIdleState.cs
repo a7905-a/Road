@@ -6,15 +6,23 @@ namespace ProjectRoad.State
 {
     public class UnitIdleState : StateMachineBehaviour
     {
-        AttackController attackController;
-        BaseUnit baseUnit;
-        Move move;
+        // 캐싱 컴포넌트
+        private AttackController attackController;
+        private BaseUnit baseUnit;
+        private Move move;
+
+        private bool isInitialized = false;
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            attackController = animator.GetComponent<AttackController>();
-            baseUnit = animator.GetComponent<BaseUnit>();
-            move = animator.GetComponent<Move>();
+            if (!isInitialized)
+            {
+                attackController = animator.GetComponent<AttackController>();
+                baseUnit = animator.GetComponent<BaseUnit>();
+                move = animator.GetComponent<Move>();
+                
+                isInitialized = true;
+            }
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -29,7 +37,7 @@ namespace ProjectRoad.State
             float distance = Vector3.Distance(animator.transform.position, attackController.targetToAttack.position);
 
             //사거기 안쪽이라면 공격
-            if (distance <= baseUnit.unitData.AttackRange)
+            if (distance <= baseUnit.CurrentAttackRange)
             {
                 // 타겟을 볼려고 회전
                 animator.transform.LookAt(attackController.targetToAttack);

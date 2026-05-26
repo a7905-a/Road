@@ -8,25 +8,37 @@ namespace ProjectRoad.Manager
 {
     public class UnitSelectionManager : MonoBehaviour
     {
-        public static UnitSelectionManager Instance { get; private set; }
+        public static UnitSelectionManager Instance;
 
-        //메모리 효율성을 더 올릴려면 new List<GameObject>(100) 처럼 이렇게 미리 크기를 지정해주는게 좋다.
+        [Header("유닛 상태")]
+
+        //메모리 효율성을 더 올리고 싶으면 new List<GameObject>(100) 처럼 이렇게 미리 크기를 지정해주는게 좋다.
         //리스트에 유닛이 추가, 없어지게 하는건 메서드 만을 사용해야 하기 때문에 읽기 전용으로 설정
-        [SerializeField] List<GameObject> allUnitsList = new List<GameObject>();
+        [SerializeField] private List<GameObject> allUnitsList = new List<GameObject>(100);
         public IReadOnlyList<GameObject> AllUnitList => allUnitsList;
 
-        [SerializeField] List<GameObject> unitsSelected = new List<GameObject>();
+        [SerializeField] private List<GameObject> unitsSelected = new List<GameObject>(50);
         public IReadOnlyList<GameObject> SelectedUnits => unitsSelected;
-        
-        [SerializeField] LayerMask clickable;
-        [SerializeField] LayerMask ground;
-        [SerializeField] LayerMask attackable;
-        [SerializeField] GameObject groundMarker; 
-        [SerializeField] bool attackCursorVisible;
-        [SerializeField] float formationSpacing = 2.0f;
-        Camera cam;
 
-        void Awake()
+        
+        [Header("레이어 설정")]
+        [SerializeField] private LayerMask clickable;
+        [SerializeField] private LayerMask ground;
+        [SerializeField] private LayerMask attackable;
+
+
+        [Header("부대 이동 설정")]
+        [SerializeField] private float formationSpacing = 2.0f;
+        
+
+        [Header("시각효과 & UI")]
+        [SerializeField] private GameObject groundMarker; 
+        [SerializeField] private bool attackCursorVisible;
+
+        // 캐싱 컴포넌트
+        private Camera cam;
+
+        private void Awake()
         {
             if (Instance != null && Instance != this)
             {
@@ -38,12 +50,12 @@ namespace ProjectRoad.Manager
             }
         }
 
-        void Start()
+        private void Start()
         {
             cam = Camera.main;
         }   
 
-        void Update()
+        private void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -231,7 +243,7 @@ namespace ProjectRoad.Manager
         }
 
         //center는 이동 기능에 사용할 레이캐스트의 hit.point, requiredCount는 선택된 유닛의 수, spacing은 유닛 간의 간격
-        List<Vector3> SetBFSPositions(Vector3 center, int requiredCount, float spacing)
+       private List<Vector3> SetBFSPositions(Vector3 center, int requiredCount, float spacing)
         {
             // 최종 목적지를 담을 리스트와 BFS를 위한 큐, 방문한 위치를 담을 해시셋
             List<Vector3> validPos = new List<Vector3>();
@@ -272,7 +284,7 @@ namespace ProjectRoad.Manager
             }
             return validPos;
         }
-        bool IsValidNavMeshPosition(Vector3 samplePoint, out Vector3 resultPoint, float maxDistance)
+        private bool IsValidNavMeshPosition(Vector3 samplePoint, out Vector3 resultPoint, float maxDistance)
         {
             UnityEngine.AI.NavMeshHit hit;
             // 주어진 점 주변에서 NavMesh 위를 찾음
