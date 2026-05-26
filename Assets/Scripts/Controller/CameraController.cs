@@ -5,10 +5,13 @@ namespace ProjectRoad.Controller
 {
     public class RTSCameraController : MonoBehaviour
     {
-        // 싱글톤 패턴 -> 다른 스크립트에서 쉽게 접근 가능하지만 강한 결합이 됨
-        public static RTSCameraController instance {get; private set;}
+        // 싱글톤
+        public static RTSCameraController instance;
+
+        [Header("카메라 이동 범위 설정")]
         [SerializeField] BoxCollider cameraConfiner;
-        //시작 카메라 위치를 정하는 변수 
+
+        [Header("시작 카메라 위치 설정")] 
         [SerializeField] Transform startCameraTransform;
         [SerializeField] Transform cameraTransform;
         [SerializeField] Transform followTransform; //프로퍼티로 변경 가능
@@ -20,8 +23,8 @@ namespace ProjectRoad.Controller
         [SerializeField] bool moveWithEdgeScrolling;
         [SerializeField] bool moveWithMouseDrag;
 
-        [Header("키보드 이동 속도 설정")]
-        // 키보드 이동 속도 설정이라고 했지만 전체적인 움직임 속도
+
+        [Header("전체적인 움직임 속도 설정")]
         [SerializeField] float fastSpeed = 0.05f;
         [SerializeField] float normalSpeed = 0.01f;
         [SerializeField] float movementSensitivity = 1f;
@@ -49,24 +52,17 @@ namespace ProjectRoad.Controller
         void Start()
         {
             instance = this;
-
             newPosition = transform.position;
-
             movementSpeed = normalSpeed;
-            
             transform.position = startCameraTransform.position;
         }
 
         void Update()
         {
-            
-
-            // Allow Camera to follow Target
             if (followTransform != null)
             {
                 transform.position = followTransform.position;
             }
-            // Let us control Camera
             else
             {
                 HandleCameraMovement();
@@ -83,16 +79,11 @@ namespace ProjectRoad.Controller
                 newPosition.x = Mathf.Clamp(newPosition.x, bounds.min.x, bounds.max.x);
                 newPosition.z = Mathf.Clamp(newPosition.z, bounds.min.z, bounds.max.z);
             }
-
-            // 3. 최종 위치 적용
-            //transform.position = newPosition;
-            
         }
 
         void HandleCameraMovement()
         {
 
-            // Keyboard Control
             if (moveWithKeyboad)
             {
                 if (Input.GetKey(KeyCode.LeftCommand))
@@ -122,11 +113,10 @@ namespace ProjectRoad.Controller
                 }
             }
 
-            // Edge Scrolling
             if (moveWithEdgeScrolling)
             {
 
-                // Move Right
+                
                 if (Input.mousePosition.x > Screen.width - edgeSize)
                 {
                     newPosition += (transform.right * movementSpeed);
@@ -134,7 +124,7 @@ namespace ProjectRoad.Controller
                     isCursorSet = true;
                 }
 
-                // Move Left
+                
                 else if (Input.mousePosition.x < edgeSize)
                 {
                     newPosition += (transform.right * -movementSpeed);
@@ -142,7 +132,7 @@ namespace ProjectRoad.Controller
                     isCursorSet = true;
                 }
 
-                // Move Up
+                
                 else if (Input.mousePosition.y > Screen.height - edgeSize)
                 {
                     newPosition += (transform.forward * movementSpeed);
@@ -150,7 +140,7 @@ namespace ProjectRoad.Controller
                     isCursorSet = true;
                 }
 
-                // Move Down
+                
                 else if (Input.mousePosition.y < edgeSize)
                 {
                     newPosition += (transform.forward * -movementSpeed);
@@ -174,7 +164,6 @@ namespace ProjectRoad.Controller
 
         private void ChangeCursor(CursorArrow newCursor)
         {
-            // Only change cursor if its not the same cursor
             if (currentCursor != newCursor)
             {
                 switch (newCursor)

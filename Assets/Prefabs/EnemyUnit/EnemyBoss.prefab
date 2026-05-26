@@ -1333,7 +1333,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1871688774113313690}
   - component: {fileID: 4830474065507336078}
-  - component: {fileID: 466684796733783199}
   - component: {fileID: 1310812062225210407}
   - component: {fileID: 7057612645239203179}
   - component: {fileID: 5506208006456679564}
@@ -1377,25 +1376,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2d689b4a95dd2448dcc4d0bb9c89ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStateManager
-  baseUnit: {fileID: 1310812062225210407}
   attackTimer: 0
   animator: {fileID: 5147625811111823736}
   agent: {fileID: 5779347126089832455}
   simplePatrol: {fileID: 5506208006456679564}
+  baseUnit: {fileID: 1310812062225210407}
   attackController: {fileID: 0}
---- !u!114 &466684796733783199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2635458278265065943}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a93de5abd85810d429b6b8616cf47982, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyDateManger
-  enemyDate: {fileID: 11400000, guid: 6858de0e766df294485224b5460a2383, type: 2}
 --- !u!114 &1310812062225210407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1408,8 +1394,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b083fd43c4e454eb8b9abf1c2ed3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  unitData: {fileID: 11400000, guid: a5515bbc6d2d61b47994da7e5584f0e5, type: 2}
+  myUnitID: 0
   healthTracker: {fileID: 7160327262555419574}
+  maxHealth: 0
+  currentHealth: 0
+  currentDamage: 0
+  currentMoveSpeed: 0
+  currentAttackRate: 0
+  currentAttackRange: 0
+  damagePoint: {fileID: 0}
+  visualData: {fileID: 0}
 --- !u!114 &7057612645239203179
 MonoBehaviour:
   m_ObjectHideFlags: 0
