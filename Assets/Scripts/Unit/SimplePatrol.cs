@@ -3,10 +3,10 @@ using UnityEngine.AI;
 
 public class SimplePatrol : MonoBehaviour
 {
-    [SerializeField] Transform[] patrolPoints;
-    NavMeshAgent agent;
-    int currentPointIndex = 0;
-    void Awake()
+    [SerializeField] private Transform[] patrolPoints;
+    private NavMeshAgent agent;
+    private int currentPointIndex = 0;
+    private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
     }

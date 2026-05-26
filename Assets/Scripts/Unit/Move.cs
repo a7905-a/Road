@@ -5,37 +5,41 @@ namespace ProjectRoad.Unit
 {
     public class Move : MonoBehaviour
     {
-        [SerializeField] LayerMask ground;
-        [SerializeField] float crowdRadius = 3.0f;
-        [SerializeField] float stuckTimeThreshold = 1.0f;
-        float stuckTimer = 0f;
+        [Header("이동 가능 레이어")]
+        [SerializeField] private LayerMask ground;
 
-        Camera cam;
-        NavMeshAgent agent;
+        [Header("병목 이동 설정")]
+        [SerializeField] private float crowdRadius = 3.0f;
+        [SerializeField] private float minVelocityToMove = 2.5f ;
+        [SerializeField] private float stuckTimeThreshold = 1.0f;
+        private float stuckTimer = 0f;
+
+
+        // 유닛의 현재 이동 상태
         public bool isCommandedMove;
         public bool isHolding;
 
-        
+        // 캐싱 컴포넌트
+        private Camera cam;
+        private NavMeshAgent agent;
 
-        void Awake()
+        private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
         }
 
-        void Start()
+        private void Start()
         {
             cam = Camera.main;
         }
 
-        void Update()
+        private void Update()
         {
-            HandleMoveInput();
             CheckMove();
+            HandleMoveInput();
         }
 
-
-
-        void CheckMove()
+        private void CheckMove()
         {
             if (isCommandedMove)
             {
@@ -43,7 +47,7 @@ namespace ProjectRoad.Unit
             }
         }
 
-        void HandleMoveInput()
+        private void HandleMoveInput()
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
@@ -68,15 +72,13 @@ namespace ProjectRoad.Unit
             }
         }
 
-        bool MoveToCursor()
+        private bool MoveToCursor()
         {
             RaycastHit hit;
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
-                //isCommandedMove = true;
-                //agent.SetDestination(hit.point);
                 MoveToPosition(hit.point);
                 agent.avoidancePriority = 50;
                 return true;
@@ -89,7 +91,7 @@ namespace ProjectRoad.Unit
             isCommandedMove = true;
             agent.SetDestination(position);
         }
-        void CheckArrived()
+        private void CheckArrived()
         {   
             //경로를 계산중이라면 true를 반환함 그래서 경로 계산이 다 끝난 상태에서 거리 계산을 해야 되서 return을 넣었다
             if (agent.pathPending) return;
@@ -110,7 +112,7 @@ namespace ProjectRoad.Unit
             if (isCommandedMove) 
             {
                 //누군가에게 막혀서 못 가고 있다면
-                if (agent.velocity.sqrMagnitude < 2.5f) 
+                if (agent.velocity.sqrMagnitude < minVelocityToMove) 
                 {
                     stuckTimer += Time.deltaTime; // 타이머 증가
 
@@ -128,7 +130,7 @@ namespace ProjectRoad.Unit
             }
             
         }
-        void StopMovement()
+        private void StopMovement()
         {
             isCommandedMove = false;
             stuckTimer = 0f;

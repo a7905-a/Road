@@ -8,20 +8,31 @@ namespace ProjectRoad.State
 {
     public class UnitAttackState : StateMachineBehaviour
     {
-        NavMeshAgent agent;
-        AttackController attackController;
-        BaseUnit baseUnit;
-        Move move;
-        float attackTimer;
+        // 상태 변수
+        private float attackTimer;
+
+        // 캐싱 컴포넌트 
+        private NavMeshAgent agent;
+        private AttackController attackController;
+        private BaseUnit baseUnit;
+        private Move move;
+
+        private bool isInitialized = false;
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            agent = animator.GetComponent<NavMeshAgent>();
-            attackController = animator.GetComponent<AttackController>();
-            baseUnit = animator.GetComponent<BaseUnit>();
-            move = animator.GetComponent<Move>();
+            if (!isInitialized)
+            {
+                agent = animator.GetComponent<NavMeshAgent>();
+                attackController = animator.GetComponent<AttackController>();
+                baseUnit = animator.GetComponent<BaseUnit>();
+                move = animator.GetComponent<Move>();
+
+                isInitialized = true;
+            }
 
             agent.ResetPath();
             agent.velocity = Vector3.zero;
+            attackTimer = 0f;
         }
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -44,7 +55,7 @@ namespace ProjectRoad.State
                 {
                     Attack();
                     
-                    attackTimer = 1f / baseUnit.unitData.AttackRate;
+                    attackTimer = 1f / baseUnit.CurrentAttackRate;
                 }
                 else
                 {
@@ -53,7 +64,7 @@ namespace ProjectRoad.State
                 
                 float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
 
-                if (distanceFromTarget > baseUnit.unitData.AttackRange || attackController.targetToAttack == null)
+                if (distanceFromTarget > baseUnit.CurrentAttackRate || attackController.targetToAttack == null)
                 {
                     animator.SetBool("Attack", false);
                 }
@@ -65,24 +76,24 @@ namespace ProjectRoad.State
             }
         }
 
-        void Attack()
-    {
-        //타겟이 사라졌는지 먼저 확인
-        if (attackController.targetToAttack == null) return;
-        
-        float damageToInflict = baseUnit.unitData.Damage;
-
-        //데미지를 넣을 수 있는 대상의 정보를 불러오기
-        BaseUnit targetEntity = attackController.targetToAttack.GetComponent<BaseUnit>();
-
-        //정말로 때릴 수 있는 상대인지 확인 후 데미지
-        if (targetEntity != null)
+        private void Attack()
         {
-            targetEntity.TakeDamage(damageToInflict);
-        }
-    }
+            //타겟이 사라졌는지 먼저 확인
+            if (attackController.targetToAttack == null) return;
+            
+            float damageToInflict = baseUnit.CurrentDamage;
 
-        void LookAtTarget()
+            //데미지를 넣을 수 있는 대상의 정보를 불러오기
+            BaseUnit targetEntity = attackController.targetToAttack.GetComponent<BaseUnit>();
+
+            //정말로 때릴 수 있는 상대인지 확인 후 데미지
+            if (targetEntity != null)
+            {
+                targetEntity.TakeDamage(damageToInflict);
+            }
+        }
+
+        private void LookAtTarget()
         {
             Vector3 direction = attackController.targetToAttack.position - agent.transform.position;
             agent.transform.rotation = Quaternion.LookRotation(direction);

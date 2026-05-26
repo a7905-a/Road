@@ -7,18 +7,26 @@ namespace ProjectRoad.State
 {
     public class UnitFollowState : StateMachineBehaviour
     {
-        AttackController attackController;
-        BaseUnit baseUnit;
-        NavMeshAgent agent;
-        Move move;
+        // 캐싱 컴포넌트
+        private AttackController attackController;
+        private BaseUnit baseUnit;
+        private NavMeshAgent agent;
+        private Move move;
+
+        private bool isInitialized = false;
 
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            attackController = animator.GetComponent<AttackController>();
-            agent = animator.transform.GetComponent<NavMeshAgent>();
-            baseUnit = animator.GetComponent<BaseUnit>();
-            move = animator.GetComponent<Move>();
+            if (!isInitialized)
+            {
+                attackController = animator.GetComponent<AttackController>();
+                agent = animator.transform.GetComponent<NavMeshAgent>();
+                baseUnit = animator.GetComponent<BaseUnit>();
+                move = animator.GetComponent<Move>();
+                
+                isInitialized = true;
+            }
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -34,7 +42,7 @@ namespace ProjectRoad.State
                 {
                     float distanceFromTarget = Vector3.Distance(attackController.targetToAttack.position, animator.transform.position);
 
-                    if (distanceFromTarget <= baseUnit.unitData.AttackRange)
+                    if (distanceFromTarget <= baseUnit.CurrentAttackRange)
                     {
                         //사거리 내부로 들어오면 공격 조건 활성화
                         animator.transform.LookAt(attackController.targetToAttack);
@@ -50,8 +58,6 @@ namespace ProjectRoad.State
                     }
                 }
             }
-
-            
 
         }
 
