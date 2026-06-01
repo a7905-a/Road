@@ -139,7 +139,7 @@ namespace ProjectRoad.Manager
 
         private void SelectUnit(GameObject unit, bool isSelected)
         {
-            EnableUnitMovement(unit, isSelected);
+            //EnableUnitMovement(unit, isSelected);
             TriggerSelectionIndicator(unit, isSelected);
         }
 

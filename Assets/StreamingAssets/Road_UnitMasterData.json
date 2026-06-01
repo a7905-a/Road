@@ -2,7 +2,7 @@
   {
     "UnitID": 100,
     "UnitName": "Player",
-    "MaxHealth": 250.0,
+    "MaxHealth": 9999.0,
     "Damage": 20.0,
     "AttackRate": 1.5,
     "AttackRange": 10.0,

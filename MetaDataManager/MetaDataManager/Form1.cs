@@ -40,6 +40,7 @@ namespace MetaDataManager
                 //컴퓨터 메모리에 있는 데이터 형태 그대로는 파일에 저장할 수 없음 그레서 텍스트 형식인 JSON으로 변환하는 과정이 필요함
                 //Formatting.Indented는 가람이 읽기 좋게 들여쓰기를 넣어주는 옵션
                 string jsonString = JsonConvert.SerializeObject(unitList, Formatting.Indented);
+                
 
                 //Environment...Desktop은 현재 사용자의 '바탕화면' 폴더 경로를 자동으로 찾아줌
                 //Path.Combine은 폴더 경로와 파일 이름(Bullet_MasterData.json)을 안전하게 합쳐줌
@@ -48,10 +49,13 @@ namespace MetaDataManager
 
                 string path = @"..\..\..\..\..\Assets\StreamingAssets\Road_UnitMasterData.json";
                 
+                
                 //위에서 만든 주소(path)에, 위에서 변환한 텍스트(jsonString)를 파일로 저장.
                 File.WriteAllText(path, jsonString);
 
-                MessageBox.Show("데이터가 완벽하게 저장되었습니다!\n경로: " + path);
+                string absolutePath = Path.GetFullPath(path);
+
+                MessageBox.Show("데이터가 완벽하게 저장되었습니다!\n경로: " + absolutePath);
             }
             catch (Exception ex)
             {
