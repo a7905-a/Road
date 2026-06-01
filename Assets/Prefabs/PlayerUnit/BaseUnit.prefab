@@ -50,7 +50,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431471388790603155}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e00fed64b53a634a838e4ccc8ad644b, type: 3}
   m_Name: 
@@ -58,7 +58,11 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 8
+  crowdRadius: 3
+  minVelocityToMove: 2.5
+  stuckTimeThreshold: 1
   isCommandedMove: 0
+  isHolding: 0
 --- !u!114 &5179333067286015853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,9 +75,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e83c8c160d21e04e8721079bf1bdd9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
-  unitData: {fileID: 11400000, guid: 009c090e7abbc4c409df6aa0f8c50a13, type: 2}
+  myUnitID: 0
   healthTracker: {fileID: 7507457695707275952}
+  maxHealth: 0
+  currentHealth: 0
+  currentDamage: 0
+  currentMoveSpeed: 0
+  currentAttackRate: 0
+  currentAttackRange: 0
   attackPoint: {fileID: 0}
+  hitPoint: {fileID: 0}
+  visualData: {fileID: 0}
 --- !u!114 &7550802246864075045
 MonoBehaviour:
   m_ObjectHideFlags: 0
