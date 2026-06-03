@@ -9,7 +9,7 @@ namespace ProjectRoad.Unit
         [SerializeField] private LayerMask ground;
 
         [Header("병목 이동 설정")]
-        [SerializeField] private float crowdRadius = 3.0f;
+        //[SerializeField] private float crowdRadius = 3.0f;
         [SerializeField] private float minVelocityToMove = 2.5f ;
         [SerializeField] private float stuckTimeThreshold = 1.0f;
         private float stuckTimer = 0f;
@@ -112,7 +112,7 @@ namespace ProjectRoad.Unit
             if (isCommandedMove) 
             {
                 //누군가에게 막혀서 못 가고 있다면
-                if (agent.velocity.sqrMagnitude < minVelocityToMove) 
+                if (agent.velocity.magnitude < minVelocityToMove) 
                 {
                     stuckTimer += Time.deltaTime; // 타이머 증가
 
