@@ -65,7 +65,10 @@ namespace ProjectRoad.Unit
             // 발사 이펙트 생성
             if (visualData.muzzleFlash != null)
             {
-                Instantiate(visualData.muzzleFlash, attackPoint.position, attackPoint.rotation);
+                //Instantiate(visualData.muzzleFlash, attackPoint.position, attackPoint.rotation);
+                GameObject muzzleFlash = PoolManager.instance.ActiveObject(0); // 0번 인덱스가 총구 이펙트라고 가정
+                PoolManager.instance.SetPosition(muzzleFlash, attackPoint.position);
+                
             }
 
             // attackController를 사용하여 타겟 가져오기
@@ -73,7 +76,10 @@ namespace ProjectRoad.Unit
             
             if (currentTarget != null)
             {
-                GameObject lineEffect = Instantiate(visualData.bulletLine, attackPoint.position, attackPoint.rotation);
+                //GameObject lineEffect = Instantiate(visualData.bulletLine, attackPoint.position, attackPoint.rotation);
+                GameObject lineEffect = PoolManager.instance.ActiveObject(2);
+                PoolManager.instance.SetPosition(lineEffect, attackPoint.position);
+                
                 LineRenderer lr = lineEffect.GetComponent<LineRenderer>();
 
                 Vector3 startPos = attackPoint.position;
@@ -90,6 +96,8 @@ namespace ProjectRoad.Unit
 
             // 0.05초 동안 투명해지는 페이드아웃 처리
             Color baseColor = lr.startColor; // 매테리얼의 기본 색상을 가져옵니다 (Alpha는 1로 가정)
+            lr.startColor = new Color(baseColor.r, baseColor.g, baseColor.b, 1f);
+            lr.endColor = new Color(baseColor.r, baseColor.g, baseColor.b, 1f);
             
             float duration = 0.2f;
             float time = 0;
@@ -109,7 +117,7 @@ namespace ProjectRoad.Unit
             }
 
             // 페이드아웃이 끝나면 오브젝트를 지우기
-            Destroy(lr.gameObject);
+            PoolManager.instance.DeactiveObject(lr.gameObject);
         }
 
     }
