@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using ProjectRoad.Manager;
 
 namespace ProjectRoad.Unit
 {
@@ -17,7 +18,9 @@ namespace ProjectRoad.Unit
         {
             if (visualData != null && hitPoint != null)
             {
-                Instantiate(visualData.hitEffect, hitPoint.position, hitPoint.rotation);
+                //Instantiate(visualData.hitEffect, hitPoint.position, hitPoint.rotation);
+                GameObject hitEffect = PoolManager.instance.ActiveObject(0);
+                PoolManager.instance.SetPosition(hitEffect, hitPoint.position);
             }
         }
 
@@ -25,7 +28,9 @@ namespace ProjectRoad.Unit
         {
             if (visualData.muzzleFlash != null)
             {
-                Instantiate(visualData.muzzleFlash, attackPoint.position, attackPoint.rotation);
+                //Instantiate(visualData.muzzleFlash, attackPoint.position, attackPoint.rotation);
+                GameObject muzzleFlash = PoolManager.instance.ActiveObject(1);
+                PoolManager.instance.SetPosition(muzzleFlash, attackPoint.position);
             }
         }
 
