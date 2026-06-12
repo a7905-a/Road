@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6992152519288308540}
   - component: {fileID: 5179333067286015853}
   - component: {fileID: 7550802246864075045}
+  - component: {fileID: 4967301311049488424}
   - component: {fileID: 9209885530799305096}
   - component: {fileID: 7329928038010698712}
   - component: {fileID: 1629996528463055710}
@@ -58,7 +59,6 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 8
-  crowdRadius: 3
   minVelocityToMove: 2.5
   stuckTimeThreshold: 1
   isCommandedMove: 0
@@ -100,6 +100,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackController
   targetType: 1
   targetToAttack: {fileID: 0}
+--- !u!114 &4967301311049488424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431471388790603155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78663dfc47ee18c47a342ec9574c338b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectRoad.Unit.ActionScheduler
 --- !u!33 &9209885530799305096
 MeshFilter:
   m_ObjectHideFlags: 0

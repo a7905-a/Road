@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 namespace ProjectRoad.Unit
 {
-    public class Move : MonoBehaviour
+    public class Move : MonoBehaviour, IAction
     {
         [Header("이동 가능 레이어")]
         [SerializeField] private LayerMask ground;
@@ -22,10 +22,12 @@ namespace ProjectRoad.Unit
         // 캐싱 컴포넌트
         private Camera cam;
         private NavMeshAgent agent;
+        private ActionScheduler actionScheduler;
 
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
+            actionScheduler = GetComponent<ActionScheduler>();
         }
 
         private void Start()
@@ -84,6 +86,17 @@ namespace ProjectRoad.Unit
                 return true;
             }
             return false;
+        }
+
+        public void StartMoveAction(Vector3 destination)
+        {
+            actionScheduler.StartAction(this);
+            MoveToPosition(destination);
+        }
+
+        public void Cancel()
+        {
+            StopMovement();
         }
 
         public void MoveToPosition(Vector3 position)
