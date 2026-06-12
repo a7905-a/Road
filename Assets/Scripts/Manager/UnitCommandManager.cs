@@ -74,7 +74,7 @@ namespace ProjectRoad.Manager
             foreach(GameObject unit in units)
             {
                 AttackController attackController = unit.GetComponent<AttackController>();
-                attackController.targetToAttack = target;
+                attackController.StartAttackAction(target);
             }   
         }
 
@@ -96,7 +96,7 @@ namespace ProjectRoad.Manager
                 if (i < sortedPositions.Count)
                 {
                     Move moveScript = sortedUnits[i].GetComponent<Move>();
-                    moveScript.MoveToPosition(sortedPositions[i]);
+                    moveScript.StartMoveAction(sortedPositions[i]);
                 }
             }
         }
